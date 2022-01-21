@@ -42,13 +42,13 @@
           <img src="../assets/static/menu/person.svg" class="icon" alt=""/>
           <span>家长管理</span>
         </el-menu-item>
-        <el-menu-item index="7">
+        <el-menu-item index="8">
           <img src="../assets/static/menu/document.svg" class="icon" alt=""/>
           <span>专家管理</span>
         </el-menu-item>
       </el-menu>
     </div>
-    <div class="contain">
+    <div class="contain col-wrapper">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
