@@ -6,13 +6,13 @@ export default {
         {
             path: '/',
             name: 'index',
-            redirect: 'home',
+            redirect: 'baskInfo',
             component: () => import('../views/index'),
             children: [
                 {
-                    path: 'home',
-                    name: 'home',
-                    component: () => import('../views/home/home')
+                    path: '/baskInfo',
+                    name: 'baskInfo',
+                    component: () => import('../views/schoolManage/basicInfo')
                 },
             ]
         },

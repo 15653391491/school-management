@@ -2,13 +2,21 @@
   <div class="box row-wrapper">
     <div class="menu">
       <div class="col-wrapper menuTitle">
-        <span>学校管理后台</span>
+        <div v-show="!isMenuExpand" class="col-wrapper">
+          <span>学校管理后台</span>
+        </div>
+        <Menu v-show="isMenuExpand"/>
       </div>
-      <el-menu active-text-color="#ffffff" class="menuContain" text-color="#ffffff" background-color="#20222A">
+      <el-menu active-text-color="#ffffff"
+               class="menuContain"
+               text-color="#ffffff"
+               :collapse="isMenuExpand"
+               :collapse-transition="true"
+               background-color="#20222A">
         <el-sub-menu class="subMenu" index="1">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
-            <span>学校管理</span>
+            <span class="menuItem">学校管理</span>
           </template>
           <el-menu-item index="1-1">基础信息</el-menu-item>
           <el-menu-item index="1-2">角色管理</el-menu-item>
@@ -16,42 +24,88 @@
         </el-sub-menu>
         <el-menu-item index="2">
           <img src="../assets/static/menu/class.svg" class="icon" alt=""/>
-          <span>年级/班级管理</span>
+          <span class="menuItem">年级/班级管理</span>
         </el-menu-item>
         <el-menu-item index="3">
           <img src="../assets/static/menu/warning.svg" class="icon" alt=""/>
-          <span>教务处管理</span>
+          <span class="menuItem">教务处管理</span>
         </el-menu-item>
         <el-menu-item index="4">
           <img src="../assets/static/menu/manageMent.svg" class="icon" alt=""/>
-          <span>科目管理</span>
+          <span class="menuItem">科目管理</span>
         </el-menu-item>
         <el-sub-menu class="subMenu" index="6">
           <template #title>
             <img class="icon" src="../assets/static/menu/book.svg" alt=""/>
-            <span>教师管理</span>
+            <span class="menuItem">教师管理</span>
           </template>
           <el-menu-item index="6-1">教师信息</el-menu-item>
           <el-menu-item index="6-2">小组管理</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="6">
           <img src="../assets/static/menu/student.svg" class="icon" alt=""/>
-          <span>学生管理</span>
+          <span class="menuItem">学生管理</span>
         </el-menu-item>
         <el-menu-item index="7">
           <img src="../assets/static/menu/person.svg" class="icon" alt=""/>
-          <span>家长管理</span>
+          <span class="menuItem">家长管理</span>
         </el-menu-item>
         <el-menu-item index="8">
           <img src="../assets/static/menu/document.svg" class="icon" alt=""/>
-          <span>专家管理</span>
+          <span class="menuItem">专家管理</span>
         </el-menu-item>
       </el-menu>
     </div>
     <div class="contain col-wrapper">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <div class="header row-wrapper">
+        <!--    左侧图标    -->
+        <div class="row-wrapper">
+          <div class="iconContent" v-show="isMenuExpand" @click="expandMenu">
+            <Expand class="icon iconHover"/>
+          </div>
+          <div class="iconContent" v-show="!isMenuExpand" @click="expandMenu">
+            <Fold class="icon iconHover"/>
+          </div>
+          <div class="iconContent">
+            <RefreshLeft class="icon iconHover"/>
+          </div>
+        </div>
+        <!--    右侧图标    -->
+        <div class="row-wrapper">
+          <!--     打开/关闭全屏     -->
+          <div class="iconContent">
+            <div @click="fullScreen" class="iconHover" v-show="!isFullScreen">
+              <img src="../assets/static/menu/fullScreen.svg" class="icon" alt="全屏"/>
+            </div>
+            <div @click="fullScreen" class="iconHover" v-show="isFullScreen">
+              <img src="../assets/static/menu/cancelFullScreen.svg" class="icon" alt="全屏"/>
+            </div>
+          </div>
+          <!--    退出登录      -->
+          <el-popover ref="popover"
+                      popper-class="popper"
+                      placement="bottom"
+                      trigger="hover">
+            <template #reference>
+              <div @mousemove="isTop=true" @mouseout="isTop=false" class="iconContent row-wrapper">
+                <span>管理员</span>
+                <CaretTop v-show="isTop" class="icon"/>
+                <CaretBottom v-show="!isTop" class="icon"/>
+              </div>
+            </template>
+            <template #default>
+              <div style="width:100%" class="col-wrapper">
+                <el-button>退出</el-button>
+              </div>
+            </template>
+          </el-popover>
+        </div>
+      </div>
+      <div class="view">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </div>
     </div>
   </div>
 </template>
@@ -60,7 +114,41 @@
 import '../styles/flax.css'
 
 export default {
-  name: "home"
+  name: "home",
+  data() {
+    return {
+      isMenuExpand: false,
+      isFullScreen: false,
+      isTop: false // 退出登录图标
+    }
+  },
+  methods: {
+    /**
+     * 展开/收起菜单
+     */
+    expandMenu() {
+      this.isMenuExpand = !this.isMenuExpand
+    },
+    /**
+     * 打开/关闭全屏
+     */
+    fullScreen() {
+      this.isFullScreen = !this.isFullScreen
+    }
+  },
+  watch: {
+    /**
+     * 打开/关闭全屏
+     * @param val
+     */
+    isFullScreen(val) {
+      if (val) {
+        document.documentElement.requestFullscreen()
+      } else {
+        document.exitFullscreen()
+      }
+    }
+  }
 }
 </script>
 
@@ -74,7 +162,11 @@ export default {
 }
 
 .el-menu-item.is-active {
-  background-color: #009688;
+  background-color: #017267;
+}
+
+.el-sub-menu__title:hover {
+  background-color: #009688 !important;
 }
 </style>
 <style lang="less" scoped>
@@ -83,7 +175,6 @@ export default {
 
   .menu {
     height: 100%;
-    width: 15%;
     background-color: #20222A;
   }
 
@@ -92,18 +183,60 @@ export default {
   }
 
   .contain {
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+
+    .header {
+      width: 100%;
+      height: 50px;
+      justify-content: space-between;
+    }
   }
 }
 
 .menuTitle {
   color: #ffffff;
   padding: 15px;
+
+  div {
+    width: 220px;
+  }
+}
+
+.menuItem {
+  margin-left: 15px;
 }
 
 .icon {
   width: 20px;
   height: 20px;
-  margin: 5px;
-  margin-right: 10px;
+}
+
+.iconHover:hover {
+  cursor: pointer;
+}
+
+.iconContent {
+  padding: 10px 15px;
+  transition: all .5s;
+
+  span {
+    line-height: 24px;
+  }
+
+  .icon {
+    margin-left: 5px;
+  }
+}
+
+.iconContent:hover {
+  border-bottom: 2px solid;
+}
+.popper{
+  width: 80px;
+}
+.view{
+  padding: 15px;
 }
 </style>
