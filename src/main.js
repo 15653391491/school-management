@@ -3,6 +3,7 @@ import App from './App.vue'
 import routes from "@/routes";
 import {store} from '@/vuex'
 import qs from 'qs'
+import utils from './components/elementUtils/lib'
 // --- element-plus ---
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -14,6 +15,7 @@ const app = createApp(App)
 app.config.globalProperties.$store = store
 app.config.globalProperties.$qs = qs
 app.mixin(iconMixin)
+app.mixin(utils)
 app.use(routes)
 app.use(store)
 app.use(ElementPlus)

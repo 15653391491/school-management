@@ -209,7 +209,7 @@ export default {
   padding: 15px;
 
   div {
-    width: 220px;
+    width: 180px;
   }
 }
 

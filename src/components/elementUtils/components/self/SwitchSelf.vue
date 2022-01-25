@@ -1,7 +1,6 @@
 <template>
   <div class="customInputWrapper">
-    <input
-      v-on="$listeners" v-bind="$attrs"
+    <input v-bind="$attrs"
       class="switch-btn switch-btn-animbg"
       type="checkbox"
       :checked="checked">

@@ -52,7 +52,7 @@
           <el-input v-model="form.address"/>
         </el-form-item>
         <el-form-item label="学校简介">
-          <el-input v-model="form.introduction" type="textarea"/>
+          <Input v-model="form.introduction" type="textarea"/>
         </el-form-item>
         <el-form-item>
           <el-button type="primary">保存修改</el-button>

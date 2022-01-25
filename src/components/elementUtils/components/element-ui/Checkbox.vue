@@ -1,12 +1,12 @@
 <template>
-  <el-button v-bind="$attrs">
+  <el-checkbox v-bind="$attrs" border>
     <slot></slot>
-  </el-button>
+  </el-checkbox>
 </template>
 
 <script>
 export default {
-  name: 'Button'
+  name: "Checkbox"
 }
 </script>
 
