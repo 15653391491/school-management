@@ -1,5 +1,5 @@
 <template>
-  <div class="box row-wrapper">
+  <div class="minbox row-wrapper">
     <div class="menu">
       <div class="col-wrapper menuTitle">
         <div v-show="!isMenuExpand" class="col-wrapper">
@@ -179,7 +179,7 @@ export default {
 }
 </style>
 <style lang="less" scoped>
-.box {
+.minbox {
   height: 100vh;
 
   .menu {
