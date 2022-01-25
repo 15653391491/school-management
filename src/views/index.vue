@@ -103,6 +103,16 @@
         </div>
       </div>
       <div class="view">
+        <el-tabs type="card"
+                 closable
+                 @tab-remove="removeTab">
+          <el-tab-pane v-for="(item,index) in editableTabs"
+                       :key="index"
+                       :label="item.title"
+                       closable
+                       :name="item.name">
+          </el-tab-pane>
+        </el-tabs>
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -120,7 +130,8 @@ export default {
     return {
       isMenuExpand: false,
       isFullScreen: false,
-      isTop: false // 退出登录图标
+      isTop: false, // 退出登录图标
+      editableTabs: []
     }
   },
   methods: {
@@ -141,8 +152,18 @@ export default {
      * @param index
      */
     selectMenu(index) {
-      console.log('index', index)
       this.$router.push({path: index})
+      this.editableTabs.push({
+        title: index,
+        name: index
+      })
+    },
+    /**
+     * 关闭标签页
+     * @param index
+     */
+    removeTab(index) {
+      console.log(index)
     }
   },
   watch: {
