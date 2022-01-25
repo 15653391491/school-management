@@ -12,25 +12,26 @@
                text-color="#ffffff"
                :collapse="isMenuExpand"
                :collapse-transition="true"
+               @select="selectMenu"
                background-color="#20222A">
         <el-sub-menu class="subMenu" index="1">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
             <span class="menuItem">学校管理</span>
           </template>
-          <el-menu-item index="1-1">基础信息</el-menu-item>
-          <el-menu-item index="1-2">角色管理</el-menu-item>
-          <el-menu-item index="1-3">管理员设置</el-menu-item>
+          <el-menu-item index="/baskInfo">基础信息</el-menu-item>
+          <el-menu-item index="/role">角色管理</el-menu-item>
+          <el-menu-item index="/adminSetting">管理员设置</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="2">
+        <el-menu-item index="/gradeClass">
           <img src="../assets/static/menu/class.svg" class="icon" alt=""/>
           <span class="menuItem">年级/班级管理</span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="/dept">
           <img src="../assets/static/menu/warning.svg" class="icon" alt=""/>
           <span class="menuItem">教务处管理</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/subjects">
           <img src="../assets/static/menu/manageMent.svg" class="icon" alt=""/>
           <span class="menuItem">科目管理</span>
         </el-menu-item>
@@ -39,18 +40,18 @@
             <img class="icon" src="../assets/static/menu/book.svg" alt=""/>
             <span class="menuItem">教师管理</span>
           </template>
-          <el-menu-item index="6-1">教师信息</el-menu-item>
-          <el-menu-item index="6-2">小组管理</el-menu-item>
+          <el-menu-item index="/teacher">教师信息</el-menu-item>
+          <el-menu-item index="/team">小组管理</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="6">
+        <el-menu-item index="/student">
           <img src="../assets/static/menu/student.svg" class="icon" alt=""/>
           <span class="menuItem">学生管理</span>
         </el-menu-item>
-        <el-menu-item index="7">
+        <el-menu-item index="/parents">
           <img src="../assets/static/menu/person.svg" class="icon" alt=""/>
           <span class="menuItem">家长管理</span>
         </el-menu-item>
-        <el-menu-item index="8">
+        <el-menu-item index="/experts">
           <img src="../assets/static/menu/document.svg" class="icon" alt=""/>
           <span class="menuItem">专家管理</span>
         </el-menu-item>
@@ -134,6 +135,14 @@ export default {
      */
     fullScreen() {
       this.isFullScreen = !this.isFullScreen
+    },
+    /**
+     * 菜单激活
+     * @param index
+     */
+    selectMenu(index) {
+      console.log('index', index)
+      this.$router.push({path: index})
     }
   },
   watch: {
@@ -233,10 +242,12 @@ export default {
 .iconContent:hover {
   border-bottom: 2px solid;
 }
-.popper{
+
+.popper {
   width: 80px;
 }
-.view{
-  padding: 15px;
+
+.view {
+  width: 100%;
 }
 </style>

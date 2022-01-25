@@ -1,0 +1,30 @@
+
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: transparent;
+}
+
+.el-select .el-input .el-select__caret {
+  display: none;
+}
+
+.el-input__inner {
+  appearance: none;
+  width: 100% !important;
+  border-color: transparent;
+  outline: none;
+  box-shadow: transparent;
+}
+
+.el-select:hover .el-input__inner {
+  border-color: transparent;
+  outline: none;
+}
+
+.el-select:focus .el-input__inner {
+  border-color: transparent;
+  outline: none;
+}
+
+.el-select .el-input__inner:focus {
+  border-color: transparent;
+}
