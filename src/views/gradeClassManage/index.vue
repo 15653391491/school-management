@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <!--  查询  -->
     <div class="form">
       <Form inline>
         <el-form-item label="入学年份">
@@ -23,6 +24,7 @@
         </el-form-item>
       </Form>
     </div>
+    <!--  表格  -->
     <div class="table">
       <el-table border :data="tableData">
         <el-table-column align="center"
@@ -59,15 +61,23 @@
         <el-table-column align="center"
                          prop="model" width="180" label="手写板型号"></el-table-column>
         <el-table-column align="center" width="180" label="操作">
-          <template #default>
+          <template #default="scope">
             <div class="row-wrapper option">
-              <Button size="small" :type="'success'">修改</Button>
-              <Button size="small" :type="'primary'">修改</Button>
+              <Button size="small" @click="edit(scope.row)" :type="'success'">修改</Button>
+              <el-popconfirm confirm-button-text="确定"
+                             cancel-button-text="取消"
+                             @confirm="del(scope.row)"
+                             :title="'确认删除吗?'">
+                <template #reference>
+                  <Button size="small" :type="'error'">删除</Button>
+                </template>
+              </el-popconfirm>
             </div>
           </template>
         </el-table-column>
       </el-table>
     </div>
+    <!--  分页器  -->
     <div class="pagination row-wrapper">
       <Pagination v-model:currentPage="page.page"
                   :total="page.total"
@@ -76,6 +86,7 @@
                   @current-change="handleCurrentChange">
       </Pagination>
     </div>
+    <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
             title="新增年级"
             @close="addVisiable=false">
@@ -149,14 +160,48 @@
       </el-checkbox-group>
 
     </Dialog>
+    <!--  编辑弹窗  -->
+    <Dialog title="编辑" v-model="editVisiable" @close="editVisiable=false">
+      <Form>
+        <el-form-item label="入学年份">
+          <Input v-model="editForm.schoolYear"/>
+        </el-form-item>
+        <el-form-item label="年级名称">
+          <Input v-model="editForm.grade"/>
+        </el-form-item>
+        <el-form-item label="年级排序号">
+          <Input v-model="editForm.gradeNum"/>
+        </el-form-item>
+        <el-form-item label="班级名称">
+          <Input v-model="editForm.class"/>
+        </el-form-item>
+        <el-form-item label="班级排序号">
+          <Input v-model="editForm.classNum"/>
+        </el-form-item>
+        <el-form-item label="手写板型号">
+          <el-select v-model="editForm.model">
+            <el-option value="1" label="T9y"></el-option>
+            <el-option value="2" label="T9W-B-KZ"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <Button :type="'primary'">确定</Button>
+          <Button @click="editVisiable=false">取消</Button>
+        </el-form-item>
+      </Form>
+    </Dialog>
   </div>
 </template>
 
 <script>
 import {shallowRef, h} from 'vue'
+import Dialog from "@/components/elementUtils/components/element-ui/Dialog";
+import Form from "@/components/elementUtils/components/element-ui/Form";
+import Input from "@/components/elementUtils/components/element-ui/Input";
 
 export default {
   name: "index",
+  components: {Input, Form, Dialog},
   data() {
     return {
       page: {
@@ -169,9 +214,12 @@ export default {
           schoolYear: '2019',
           stage: '小学',
           grade: '二年级',
+          gradeNum: '2',
           class: '一班',
+          classNum: '1',
           subject: '文科',
-          model: 'T9W-B-KZ'
+          model: 'T9W-B-KZ',
+          modelNum: '2'
         }
       ],
       form: {
@@ -275,7 +323,10 @@ export default {
           schoolYear: '',
           classNum: undefined
         },
-      ] //高中
+      ], //高中
+      // --- 编辑 ---
+      editForm: {},
+      editVisiable: false
     }
   },
   computed: {
@@ -288,8 +339,15 @@ export default {
     }
   },
   methods: {
+    /**
+     * 选择要增加的年级
+     */
     checkboxChange() {
       console.log(this.addForm.grade)
+    },
+    edit(row) {
+      this.editForm = row
+      this.editVisiable = true
     },
     /**
      * 新增
