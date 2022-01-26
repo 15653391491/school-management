@@ -118,13 +118,15 @@ export default {
   components: {Button},
   data() {
     return {
-      tableData: [{
-        account: '15552662020',
-        userName: '贾舒',
-        role: '超级管理员',
-        mobile: '15552662020',
-        password: '123456'
-      }],
+      tableData: [
+        {
+          account: '15552662020',
+          userName: '贾舒',
+          role: '超级管理员',
+          mobile: '15552662020',
+          password: '123456'
+        }
+      ],
       page: {
         page: 1,
         limit: 10,

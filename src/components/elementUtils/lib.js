@@ -9,7 +9,7 @@ import Form from './components/element-ui/Form'
 import CheckboxGroup from './components/element-ui/CheckboxGroup'
 import Pagination from './components/element-ui/Pagination'
 import ConfigProvider from "./components/element-ui/ConfigProvider";
-
+import Divider from './components/element-ui/Divider'
 export default {
     components: {
         UploadImg,
@@ -22,6 +22,7 @@ export default {
         Form,
         CheckboxGroup,
         Pagination,
-        ConfigProvider
+        ConfigProvider,
+        Divider
     }
 }
