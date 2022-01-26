@@ -103,19 +103,9 @@
         </div>
       </div>
       <div class="view">
-<!--        <el-tabs type="card"-->
-<!--                 closable-->
-<!--                 @tab-remove="removeTab">-->
-<!--          <el-tab-pane v-for="(item,index) in editableTabs"-->
-<!--                       :key="index"-->
-<!--                       :label="item.title"-->
-<!--                       closable-->
-<!--                       :name="item.name">-->
-<!--          </el-tab-pane>-->
-<!--        </el-tabs>-->
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
       </div>
     </div>
   </div>
@@ -132,8 +122,8 @@ export default {
       isFullScreen: false,
       isTop: false, // 退出登录图标
       editableTabs: [{
-        title:'基础信息',
-        name:'/baskInfo'
+        title: '基础信息',
+        name: '/baskInfo'
       }]
     }
   },

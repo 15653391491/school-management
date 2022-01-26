@@ -16,7 +16,9 @@ app.config.globalProperties.$store = store
 app.config.globalProperties.$qs = qs
 app.mixin(iconMixin)
 app.mixin(utils)
+app.use(ElementPlus)
 app.use(routes)
 app.use(store)
-app.use(ElementPlus)
+
+// app.use(ElementPlus)
 app.mount('#app')

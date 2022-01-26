@@ -7,6 +7,9 @@ import Input from './components/element-ui/Input'
 import Checkbox from "./components/element-ui/Checkbox";
 import Form from './components/element-ui/Form'
 import CheckboxGroup from './components/element-ui/CheckboxGroup'
+import Pagination from './components/element-ui/Pagination'
+import ConfigProvider from "./components/element-ui/ConfigProvider";
+
 export default {
     components: {
         UploadImg,
@@ -17,6 +20,8 @@ export default {
         Input,
         Checkbox,
         Form,
-        CheckboxGroup
+        CheckboxGroup,
+        Pagination,
+        ConfigProvider
     }
 }

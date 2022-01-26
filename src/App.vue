@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <ConfigProvider>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </ConfigProvider>
   </div>
 </template>
 
@@ -18,7 +20,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-body{
+
+body {
   margin: 0;
 }
 </style>

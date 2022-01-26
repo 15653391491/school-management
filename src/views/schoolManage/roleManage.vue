@@ -85,6 +85,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <!--  分页  -->
+    <div class="row-wrapper pagination">
+      <Pagination v-model:currentPage="page.page"
+                  :total="page.total"
+                  :page-size="page.limit"
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange">
+      </Pagination>
+    </div>
     <!--  添加弹窗  -->
     <Dialog v-model="addRoleVisiable"
             title="添加新角色"
@@ -131,26 +140,10 @@
 </template>
 
 <script>
-import Input from "@/components/elementUtils/components/element-ui/Input";
-import Checkbox from "@/components/elementUtils/components/element-ui/Checkbox";
-import CheckboxGroup from "@/components/elementUtils/components/element-ui/CheckboxGroup";
-
 export default {
   name: "roleManage",
-  components: {CheckboxGroup, Checkbox, Input},
   data() {
     return {
-      tableData: [{
-        name: '超级管理员',
-        permissions: [1, 3, 9],
-        role: 1
-      }, {
-        name: '管理员',
-        permissions: [1, 3, 9],
-        role: 2
-      },],
-      addRoleVisiable: false,
-      editRoleVisiable: false,
       permissions: [
         {
           label: '学校管理',
@@ -192,10 +185,30 @@ export default {
           label: '教师信息',
           value: 13
         },],
+      // --- 表格 ---
+      tableData: [
+        {
+          name: '超级管理员',
+          permissions: [1, 3, 9],
+          role: 1
+        }, {
+          name: '管理员',
+          permissions: [1, 3, 9],
+          role: 2
+        },],
+      page: {
+        page: 1,
+        limit: 10,
+        total: 100
+      },
+      // --- 增加角色 ---
+      addRoleVisiable: false,
       addForm: {
         name: '',
         permissions: []
       },
+      // --- 修改角色 ---
+      editRoleVisiable: false,
       editForm: {
         name: '',
         permissions: []
@@ -230,6 +243,13 @@ export default {
      */
     del(row) {
       this.$message.error(row.name)
+    },
+    handleSizeChange(val) {
+      this.page.page = 1
+      this.page.limit = val
+    },
+    handleCurrentChange(val) {
+      this.page.page = val
     }
   }
 }
@@ -237,12 +257,18 @@ export default {
 
 <style lang="less" scoped>
 .box {
-  padding: 25px;
+  padding: 15px;
   align-items: flex-start;
 
   .table {
     width: 85vw;
     margin-top: 15px;
+  }
+
+  .pagination {
+    width: 100%;
+    padding: 15px 0;
+    justify-content: center;
   }
 }
 </style>
