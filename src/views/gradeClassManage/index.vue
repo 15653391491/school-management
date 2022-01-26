@@ -33,41 +33,37 @@
                          label="序号">
         </el-table-column>
         <el-table-column align="center"
-                         width="180"
                          prop="schoolYear"
                          sortable
                          label="入学年份">
         </el-table-column>
         <el-table-column align="center"
                          prop="stage"
-                         width="180"
                          sortable
                          label="学段">
         </el-table-column>
         <el-table-column align="center"
-                         width="180"
                          prop="grade"
                          sortable
                          label="年级名称">
         </el-table-column>
         <el-table-column align="center"
                          prop="class"
-                         width="180"
                          sortable
                          label="班级名称">
         </el-table-column>
         <el-table-column align="center"
-                         prop="subject" width="180" label="文理科"></el-table-column>
+                         prop="subject" label="文理科"></el-table-column>
         <el-table-column align="center"
-                         prop="model" width="180" label="手写板型号"></el-table-column>
-        <el-table-column align="center" width="180" label="操作">
+                         prop="model" label="手写板型号"></el-table-column>
+        <el-table-column align="center" label="操作">
           <template #default="scope">
             <div class="row-wrapper option">
               <Button size="small" @click="edit(scope.row)" :type="'success'">修改</Button>
               <el-popconfirm confirm-button-text="确定"
                              cancel-button-text="取消"
                              @confirm="del(scope.row)"
-                             :title="'确认删除吗?'">
+                             :title="'确认删除'+scope.row.deptName+'吗?'">
                 <template #reference>
                   <Button size="small" :type="'error'">删除</Button>
                 </template>
@@ -345,6 +341,10 @@ export default {
     checkboxChange() {
       console.log(this.addForm.grade)
     },
+    /**
+     * 编辑行
+     * @param row
+     */
     edit(row) {
       this.editForm = row
       this.editVisiable = true
