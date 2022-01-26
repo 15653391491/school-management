@@ -12,17 +12,6 @@ export default {
   data() {
     return {
       configZh: zhCn,
-      config: {
-        name: 'zh-cn',
-        el: {
-          pagination: {
-            total: '共',
-            pagesize: '条每页',
-            goto: '跳转至',
-            pageClassifier: ''
-          },
-        },
-      }
     }
   }
 }

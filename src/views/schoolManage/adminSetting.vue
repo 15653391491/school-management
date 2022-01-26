@@ -28,6 +28,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页 -->
+    <div class="row-wrapper pagination">
+      <Pagination v-model:currentPage="page.page"
+                  :total="page.total"
+                  :page-size="page.limit"
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange">
+      </Pagination>
+    </div>
     <!--  添加弹窗  -->
     <Dialog v-model="addVisiable"
             title="添加管理员"
@@ -116,6 +125,11 @@ export default {
         mobile: '15552662020',
         password: '123456'
       }],
+      page: {
+        page: 1,
+        limit: 10,
+        total: 100
+      },
       addVisiable: false,
       editVisiable: false,
       addForm: {
@@ -143,6 +157,21 @@ export default {
      */
     del(row) {
       console.log(row)
+    },
+    /**
+     * 每页条数变化
+     * @param val
+     */
+    handleSizeChange(val) {
+      this.page.page = 1
+      this.page.limit = val
+    },
+    /**
+     * 翻页
+     * @param val
+     */
+    handleCurrentChange(val) {
+      this.page.page = val
     }
   }
 }
@@ -167,6 +196,12 @@ export default {
   .table {
     width: 85vw;
     margin-top: 15px;
+  }
+
+  .pagination {
+    justify-content: center;
+    width: 100%;
+    padding: 15px 0;
   }
 }
 
