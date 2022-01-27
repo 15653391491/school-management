@@ -24,21 +24,40 @@
     <div class="table">
       <el-table :data="tableData">
         <el-table-column align="center"
-                         width="120"
-                         type="index"
-                         label="序号">
+                         prop="account"
+                         label="账号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="deptName"
-                         label="教务处名称">
+                         prop="name"
+                         label="姓名">
         </el-table-column>
         <el-table-column align="center"
                          prop="mobile"
                          label="联系方式">
         </el-table-column>
         <el-table-column align="center"
-                         prop="remark"
-                         label="备注">
+                         label="学段">
+          <template #default="scope">
+            <span v-show="scope.row.stage==='1'">小学</span>
+            <span v-show="scope.row.stage==='2'">初中</span>
+            <span v-show="scope.row.stage==='3'">高中</span>
+          </template>
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="grade"
+                         label="年级">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="class"
+                         label="班级">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="subject"
+                         label="科目">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="identity"
+                         label="身份">
         </el-table-column>
         <el-table-column align="center"
                          label="操作">
@@ -69,43 +88,130 @@
     </div>
     <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
-            title="添加教务处"
+            title="添加教师信息"
+            width="40vw"
             @close="addVisiable=false">
-      <Form>
-        <el-form-item label="名称">
-          <Input v-model="addForm.name"/>
+      <!--   表单   -->
+      <Form class="form row-wrapper">
+        <el-form-item label="账号">
+          <Input class="input" v-model="addForm.name"/>
+        </el-form-item>
+        <el-form-item label="密码">
+          <Input class="input" v-model="addForm.mobile"/>
         </el-form-item>
         <el-form-item label="联系方式">
-          <Input v-model="addForm.mobile"/>
+          <Input class="input" v-model="addForm.remark"/>
         </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="addForm.remark"/>
+        <el-form-item label="姓名">
+          <Input class="input" v-model="addForm.remark"/>
         </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="addVisiable=false">取消</Button>
+        <el-form-item label="学段信息">
+          <Input class="input" v-model="addForm.remark"/>
+        </el-form-item>
+        <el-form-item label="板子编号">
+          <Input class="input" v-model="addForm.remark"/>
         </el-form-item>
       </Form>
+      <div>
+        <Button @click="addClassVisiable=true" :type="'primary'">添加班级</Button>
+      </div>
+      <el-table>
+        <el-table-column align="center" label="学段"></el-table-column>
+        <el-table-column align="center" label="年级"></el-table-column>
+        <el-table-column align="center" label="班级"></el-table-column>
+        <el-table-column align="center" label="身份"></el-table-column>
+        <el-table-column align="center" label="科目"></el-table-column>
+        <el-table-column align="center" label="操作"></el-table-column>
+      </el-table>
+      <template #footer>
+        <Button :type="'primary'">确定</Button>
+        <Button @click="addVisiable=false">取消</Button>
+      </template>
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
-            title="添加教务处"
+            title="编辑教师信息"
+            width="40vw"
             @close="editVisiable=false">
-      <Form>
-        <el-form-item label="名称">
-          <Input v-model="editForm.name"/>
+      <!--   表单   -->
+      <Form class="form row-wrapper">
+        <el-form-item label="账号">
+          <Input class="input" v-model="editForm.name"/>
+        </el-form-item>
+        <el-form-item label="密码">
+          <Input class="input" v-model="editForm.mobile"/>
         </el-form-item>
         <el-form-item label="联系方式">
-          <Input v-model="editForm.mobile"/>
+          <Input class="input" v-model="editForm.mobile"/>
         </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="editForm.remark"/>
+        <el-form-item label="姓名">
+          <Input class="input" v-model="editForm.grade"/>
         </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="editVisiable=false">取消</Button>
+        <el-form-item label="学段信息">
+          <el-select class="input" v-model="editForm.stage">
+            <el-option value="1" label="小学"></el-option>
+            <el-option value="2" label="初中"></el-option>
+            <el-option value="3" label="高中"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="板子编号">
+          <Input class="input" v-model="editForm.machineModel"/>
         </el-form-item>
       </Form>
+      <div>
+        <Button @click="addClassVisiable=true" :type="'primary'">添加班级</Button>
+      </div>
+      <el-table>
+        <el-table-column align="center" label="学段"></el-table-column>
+        <el-table-column align="center" label="年级"></el-table-column>
+        <el-table-column align="center" label="班级"></el-table-column>
+        <el-table-column align="center" label="身份"></el-table-column>
+        <el-table-column align="center" label="科目"></el-table-column>
+        <el-table-column align="center" label="操作"></el-table-column>
+      </el-table>
+      <template #footer>
+        <Button :type="'primary'">确定</Button>
+        <Button @click="addVisiable=false">取消</Button>
+      </template>
+    </Dialog>
+    <!--  添加班级  -->
+    <Dialog v-model="addClassVisiable"
+            title="添加班级"
+            width="20vw"
+            @close="addClassVisiable=false">
+      <div class="col-wrapper dialog">
+        <Form>
+          <el-form-item label="学段信息">
+            <el-select>
+              <el-option label="高中"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="年级">
+            <el-select>
+              <el-option label="2021"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="班级">
+            <el-select>
+              <el-option label="班级"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="科目">
+            <el-select>
+              <el-option label="化学"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="身份">
+            <el-select>
+              <el-option label="教师"></el-option>
+            </el-select>
+          </el-form-item>
+        </Form>
+      </div>
+      <template #footer>
+        <Button :type="'primary'">确定</Button>
+        <Button @click="addVisiable=false">取消</Button>
+      </template>
     </Dialog>
   </div>
 </template>
@@ -117,9 +223,15 @@ export default {
     return {
       tableData: [
         {
-          name: '1111',
-          mobile: '15655555555',
-          remark: '11111111'
+          name: '张建英',
+          mobile: '13853616123',
+          stage: '2', // 1-小学 2- 初中 3- 高中
+          grade: '一年级',
+          class: '班级',
+          subject: '政治',
+          identity: '教师',
+          account: 'zhangjianying',
+          machineModel: ''
         }
       ],
       page: {
@@ -136,7 +248,10 @@ export default {
       },
       //  --- 编辑弹窗 ---
       editVisiable: false,
-      editForm: {}
+      editForm: {},
+      //  --- 添加班级弹窗 ---
+      addClassVisiable: false,
+      addClassForm: {}
     }
   },
   methods: {
@@ -194,4 +309,16 @@ export default {
   justify-content: center;
 }
 
+.form {
+  justify-content: space-around;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.input {
+  width: 180px;
+}
+.dialog{
+  align-items: stretch;
+}
 </style>

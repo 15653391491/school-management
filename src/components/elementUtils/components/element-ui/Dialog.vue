@@ -1,10 +1,13 @@
 <template>
   <el-dialog
-    :width="$attrs.width===undefined?'30%':$attrs.width"
-    :title="$attrs.title===undefined?'提示':$attrs.title"
-    v-bind="$attrs"
-    :before-close="handleClose">
+      :width="$attrs.width===undefined?'30%':$attrs.width"
+      :title="$attrs.title===undefined?'提示':$attrs.title"
+      v-bind="$attrs"
+      :before-close="handleClose">
     <slot></slot>
+    <template #footer>
+      <slot name="footer"></slot>
+    </template>
   </el-dialog>
 </template>
 
