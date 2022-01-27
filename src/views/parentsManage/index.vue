@@ -2,42 +2,49 @@
   <div class="box">
     <div class="form">
       <Form inline>
-        <el-form-item label="教务处名称">
+        <el-form-item label="家长名称">
           <Input/>
         </el-form-item>
         <el-form-item>
           <Button type="success">搜索</Button>
-          <Button>下载模板</Button>
-          <Button type="success">数据导入</Button>
-          <Button type="warning">数据导出</Button>
-          <Button @click="addVisiable=true" type="primary">+新增</Button>
         </el-form-item>
       </Form>
     </div>
     <div class="table">
       <el-table :data="tableData">
         <el-table-column align="center"
-                         width="120"
-                         type="index"
-                         label="序号">
-        </el-table-column>
-        <el-table-column align="center"
                          prop="deptName"
-                         label="教务处名称">
+                         label="学生学号">
         </el-table-column>
         <el-table-column align="center"
                          prop="mobile"
+                         label="学生姓名">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="remark"
+                         label="家长序号">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="remark"
+                         label="家长姓名">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="remark"
                          label="联系方式">
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
-                         label="备注">
+                         label="主要监护人">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="remark"
+                         label="激活状态">
         </el-table-column>
         <el-table-column align="center"
                          label="操作">
           <template #default="scope">
             <div class="row-wrapper option">
-              <Button size="small" @click="edit(scope.row)" :type="'success'">修改</Button>
+              <Button size="small" @click="edit(scope.row)" :type="'success'">编辑</Button>
               <el-popconfirm confirm-button-text="确定"
                              cancel-button-text="取消"
                              @confirm="del(scope.row)"
@@ -110,8 +117,13 @@ export default {
     return {
       tableData: [
         {
-          name: '1111',
-          mobile: '15655555555',
+          studentId: '201921009003',
+          studentName:'张程',
+          parentId:'000005871',
+          parentName:'爸爸',
+          mobile: '18653360414',
+          mainGuardian:'1',
+          isActive:'1',
           remark: '11111111'
         }
       ],
