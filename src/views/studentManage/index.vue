@@ -2,7 +2,28 @@
   <div class="box">
     <div class="form">
       <Form inline>
-        <el-form-item label="教务处名称">
+        <el-form-item label="学段">
+          <Input/>
+        </el-form-item>
+        <el-form-item label="入学年份">
+          <el-select>
+            <el-option value="1" label="2021"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="年级">
+          <el-select>
+            <el-option value="1" label="一年级"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="班级">
+          <el-select>
+            <el-option value="1" label="一班"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="学生姓名">
+          <Input/>
+        </el-form-item>
+        <el-form-item label="手写版号">
           <Input/>
         </el-form-item>
         <el-form-item>
@@ -22,16 +43,52 @@
                          label="序号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="deptName"
-                         label="教务处名称">
+                         prop="studentId"
+                         label="学号">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="name"
+                         label="姓名">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="account"
+                         label="账号">
+        </el-table-column>
+        <el-table-column align="center"
+                         label="性别">
+          <template #default="scope">
+            <span v-show="scope.row.gender==='1'">男</span>
+            <span v-show="scope.row.gender==='2'">女</span>
+          </template>
         </el-table-column>
         <el-table-column align="center"
                          prop="mobile"
                          label="联系方式">
         </el-table-column>
         <el-table-column align="center"
-                         prop="remark"
-                         label="备注">
+                         prop="stage"
+                         label="学段">
+          <template #default="scope">
+            <span v-show="scope.row.stage==='1'">小学</span>
+            <span v-show="scope.row.stage==='2'">初中</span>
+            <span v-show="scope.row.stage==='3'">高中</span>
+          </template>
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="schoolYear"
+                         label="年份">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="grade"
+                         label="年级">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="class"
+                         label="班级">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="machineModel"
+                         label="手写板编号">
         </el-table-column>
         <el-table-column align="center"
                          label="操作">
@@ -63,42 +120,128 @@
     <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
             title="添加教务处"
+            width="35vw"
             @close="addVisiable=false">
-      <Form>
-        <el-form-item label="名称">
-          <Input v-model="addForm.name"/>
-        </el-form-item>
-        <el-form-item label="联系方式">
-          <Input v-model="addForm.mobile"/>
-        </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="addForm.remark"/>
-        </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="addVisiable=false">取消</Button>
-        </el-form-item>
-      </Form>
+      <div class="row-wrapper form">
+        <Form>
+          <el-form-item label="姓名">
+            <Input v-model="addForm.name"/>
+          </el-form-item>
+          <el-form-item label="学段">
+            <Input v-model="addForm.name"/>
+          </el-form-item>
+          <el-form-item label="年级">
+            <Input v-model="addForm.name"/>
+          </el-form-item>
+          <el-form-item label="出生日期">
+            <Input v-model="addForm.name"/>
+          </el-form-item>
+          <el-form-item label="密码">
+            <Input style="width: 180px" type="password" v-model="addForm.mobile"/>
+          </el-form-item>
+          <el-form-item label="qq邮箱">
+            <Input v-model="addForm.remark"/>
+          </el-form-item>
+          <el-form-item label="板子编号">
+            <Input v-model="addForm.remark"/>
+          </el-form-item>
+          <el-form-item label=" ">
+          </el-form-item>
+        </Form>
+        <Form>
+          <el-form-item label="学号">
+            <Input v-model="addForm.mobile"/>
+          </el-form-item>
+          <el-form-item label="入学年份">
+            <el-select>
+              <el-option label="2021" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="班级">
+            <el-select>
+              <el-option label="一班" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="性别">
+            <el-select>
+              <el-option label="男" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label=" ">
+            <span>初始值:123456</span>
+          </el-form-item>
+          <el-form-item label="联系方式">
+            <Input v-model="addForm.remark"/>
+          </el-form-item>
+        </Form>
+      </div>
+      <template #footer>
+        <Button type="primary">确定</Button>
+        <Button>取消</Button>
+      </template>
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
-            title="添加教务处"
+            title="编辑学生信息"
+            width="35vw"
             @close="editVisiable=false">
-      <Form>
-        <el-form-item label="名称">
-          <Input v-model="editForm.name"/>
-        </el-form-item>
-        <el-form-item label="联系方式">
-          <Input v-model="editForm.mobile"/>
-        </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="editForm.remark"/>
-        </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="editVisiable=false">取消</Button>
-        </el-form-item>
-      </Form>
+      <div class="row-wrapper form">
+        <Form>
+          <el-form-item label="姓名">
+            <Input v-model="editForm.name"/>
+          </el-form-item>
+          <el-form-item label="学段">
+            <Input v-model="editForm.stage"/>
+          </el-form-item>
+          <el-form-item label="年级">
+            <Input v-model="editForm.grade"/>
+          </el-form-item>
+          <el-form-item label="出生日期">
+            <Input v-model="editForm.schoolYear"/>
+          </el-form-item>
+          <el-form-item label="密码">
+            <Input style="width: 180px" type="password" v-model="editForm.password"/>
+          </el-form-item>
+          <el-form-item label="qq邮箱">
+            <Input v-model="editForm.emaile"/>
+          </el-form-item>
+          <el-form-item label="板子编号">
+            <Input v-model="editForm.machineModel"/>
+          </el-form-item>
+          <el-form-item label=" ">
+          </el-form-item>
+        </Form>
+        <Form>
+          <el-form-item label="学号">
+            <Input v-model="editForm.studentId"/>
+          </el-form-item>
+          <el-form-item label="入学年份">
+            <el-select v-model="editForm.schoolYear">
+              <el-option label="2021" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="班级">
+            <el-select v-model="editForm.class">
+              <el-option label="一班" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="性别">
+            <el-select v-model="editForm.gender">
+              <el-option label="男" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label=" ">
+            <span>初始值:123456</span>
+          </el-form-item>
+          <el-form-item label="联系方式">
+            <Input v-model="editForm.mobile"/>
+          </el-form-item>
+        </Form>
+      </div>
+      <template #footer>
+        <Button type="primary">确定</Button>
+        <Button>取消</Button>
+      </template>
     </Dialog>
   </div>
 </template>
@@ -110,9 +253,19 @@ export default {
     return {
       tableData: [
         {
-          name: '1111',
+          studentId: '20200206002',
+          name: '张三',
+          account: 'ZHANGSAN1',
+          gender: '1', // 1- 男 2- 女
+          stage: '1', // 1-小学 2- 初中 3- 高中
+          schoolYear: '1',
+          grade: '一年级',
+          class: '1',
+          machineModel: '98cdac7f3ec0',
           mobile: '15655555555',
-          remark: '11111111'
+          remark: '11111111',
+          password:'123456',
+          emaile:'11111111@qq.com'
         }
       ],
       page: {
@@ -187,4 +340,9 @@ export default {
   justify-content: center;
 }
 
+.form {
+  justify-content: space-between;
+  align-items: stretch;
+  align-self: stretch;
+}
 </style>
