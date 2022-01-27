@@ -134,11 +134,8 @@ export default {
       // --- menu ---
       isMenuExpand: false,
       // --- tabs ---
-      editableTabs: [{
-        title: '基础信息',
-        name: '/baskInfo',
-      }],
-      tabNames: ['/baskInfo'],
+      editableTabs: [],
+      tabNames: [],
       defaultTab: '/baskInfo'
     }
   },
@@ -242,6 +239,14 @@ export default {
     defaultTab(val) {
       this.$router.push({path: val})
     }
+  },
+  created() {
+    this.defaultTab = this.$route.path
+    this.editableTabs.push({
+      title: this.getMenuItemTitle(this.defaultTab),
+      name: this.defaultTab,
+    })
+    this.tabNames.push(this.defaultTab)
   }
 }
 </script>
