@@ -1,98 +1,155 @@
 <template>
   <div class="box">
-    <div class="form">
-      <Form inline>
-        <el-form-item label="教务处名称">
-          <Input/>
-        </el-form-item>
-        <el-form-item>
-          <Button type="success">搜索</Button>
-          <Button>下载模板</Button>
-          <Button type="success">数据导入</Button>
-          <Button type="warning">数据导出</Button>
-          <Button @click="addVisiable=true" type="primary">+新增</Button>
-        </el-form-item>
-      </Form>
-    </div>
-    <div class="table">
-      <el-table :data="tableData">
-        <el-table-column align="center"
-                         width="120"
-                         type="index"
-                         label="序号">
-        </el-table-column>
-        <el-table-column align="center"
-                         prop="deptName"
-                         label="教务处名称">
-        </el-table-column>
-        <el-table-column align="center"
-                         prop="mobile"
-                         label="联系方式">
-        </el-table-column>
-        <el-table-column align="center"
-                         prop="remark"
-                         label="备注">
-        </el-table-column>
-        <el-table-column align="center"
-                         label="操作">
-          <template #default="scope">
-            <div class="row-wrapper option">
-              <Button size="small" @click="edit(scope.row)" :type="'success'">修改</Button>
-              <el-popconfirm confirm-button-text="确定"
-                             cancel-button-text="取消"
-                             @confirm="del(scope.row)"
-                             :title="'确认删除吗?'">
-                <template #reference>
-                  <Button size="small" :type="'error'">删除</Button>
-                </template>
-              </el-popconfirm>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-    <!--  分页器  -->
-    <div class="pagination row-wrapper">
-      <Pagination v-model:currentPage="page.page"
-                  :total="page.total"
-                  :page-size="page.limit"
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange">
-      </Pagination>
-    </div>
+    <el-tabs v-model="selectTab" type="card">
+      <el-tab-pane name="grade" label="年级组管理">
+        <div class="table">
+          <el-table :data="tableData">
+            <el-table-column align="center"
+                             width="120"
+                             type="index"
+                             label="序号">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="deptName"
+                             label="组名">
+            </el-table-column>
+            <el-table-column align="center"
+                             label="组长">
+              <template #default="scope">
+                <Button size="small"
+                        @click="add(scope.row)"
+                        :type="'success'">设置
+                </Button>
+              </template>
+            </el-table-column>
+            <el-table-column align="center"
+                             label="操作">
+              <template #default="scope">
+                <div class="row-wrapper option">
+                  <Button size="small" @click="edit(scope.row)" :type="'success'">查看</Button>
+                </div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <!--  分页器  -->
+        <div class="pagination row-wrapper">
+          <Pagination v-model:currentPage="page.page"
+                      :total="page.total"
+                      :page-size="page.limit"
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange">
+          </Pagination>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane name="teach" label="教研组管理">
+        <div class="table">
+          <el-table :data="tableData">
+            <el-table-column align="center"
+                             width="120"
+                             type="index"
+                             label="序号">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="deptName"
+                             label="组名">
+            </el-table-column>
+            <el-table-column align="center"
+                             label="组长">
+              <template #default="scope">
+                <Button size="small"
+                        @click="edit(scope.row)"
+                        :type="'success'">设置
+                </Button>
+              </template>
+            </el-table-column>
+            <el-table-column align="center"
+                             label="操作">
+              <template #default="scope">
+                <div class="row-wrapper option">
+                  <Button size="small" @click="edit(scope.row)" :type="'success'">查看</Button>
+                </div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <!--  分页器  -->
+        <div class="pagination row-wrapper">
+          <Pagination v-model:currentPage="page.page"
+                      :total="page.total"
+                      :page-size="page.limit"
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange">
+          </Pagination>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane name="subject" label="备课组管理">
+        <div class="table">
+          <el-table :data="tableData">
+            <el-table-column align="center"
+                             width="120"
+                             type="index"
+                             label="序号">
+            </el-table-column>
+            <el-table-column align="center"
+                             prop="deptName"
+                             label="组名">
+            </el-table-column>
+            <el-table-column align="center"
+                             label="组长">
+              <template #default="scope">
+                <Button size="small"
+                        @click="edit(scope.row)"
+                        :type="'success'">设置
+                </Button>
+              </template>
+            </el-table-column>
+            <el-table-column align="center"
+                             label="操作">
+              <template #default="scope">
+                <div class="row-wrapper option">
+                  <Button size="small" @click="edit(scope.row)" :type="'success'">查看</Button>
+                </div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <!--  分页器  -->
+        <div class="pagination row-wrapper">
+          <Pagination v-model:currentPage="page.page"
+                      :total="page.total"
+                      :page-size="page.limit"
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange">
+          </Pagination>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
     <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
-            title="添加教务处"
+            title="设置组长"
             @close="addVisiable=false">
       <Form>
-        <el-form-item label="名称">
-          <Input v-model="addForm.name"/>
-        </el-form-item>
-        <el-form-item label="联系方式">
-          <Input v-model="addForm.mobile"/>
-        </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="addForm.remark"/>
-        </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="addVisiable=false">取消</Button>
+        <el-form-item label="教师名称">
+          <el-select>
+            <el-option value="1" label="李老师"></el-option>
+          </el-select>
         </el-form-item>
       </Form>
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
-            title="添加教务处"
+            title="编辑专家"
             @close="editVisiable=false">
       <Form>
-        <el-form-item label="名称">
+        <el-form-item label="组名">
           <Input v-model="editForm.name"/>
         </el-form-item>
-        <el-form-item label="联系方式">
+        <el-form-item label="组长">
           <Input v-model="editForm.mobile"/>
         </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="editForm.remark"/>
+        <el-form-item label="成员">
+          李老师
         </el-form-item>
         <el-form-item>
           <Button :type="'primary'">确定</Button>
@@ -108,6 +165,7 @@ export default {
   name: "index",
   data() {
     return {
+      selectTab: 'grade',
       tableData: [
         {
           name: '1111',
