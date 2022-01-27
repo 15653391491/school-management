@@ -77,6 +77,9 @@
         <el-table-column align="center"
                          prop="schoolYear"
                          label="年份">
+          <template #default="scope">
+            <span v-show="scope.row.schoolYear==='1'">2021</span>
+          </template>
         </el-table-column>
         <el-table-column align="center"
                          prop="grade"
@@ -85,6 +88,9 @@
         <el-table-column align="center"
                          prop="class"
                          label="班级">
+          <template #default="scope">
+            <span v-show="scope.row.class==='1'">一班</span>
+          </template>
         </el-table-column>
         <el-table-column align="center"
                          prop="machineModel"
