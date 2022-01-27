@@ -2,7 +2,14 @@
   <div class="box">
     <div class="form">
       <Form inline>
-        <el-form-item label="教务处名称">
+        <el-form-item label="学段">
+          <el-select placeholder="学段">
+            <el-option label="小学"></el-option>
+            <el-option label="初中"></el-option>
+            <el-option label="高中"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="老师姓名">
           <Input/>
         </el-form-item>
         <el-form-item>
