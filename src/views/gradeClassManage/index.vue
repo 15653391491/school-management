@@ -391,7 +391,7 @@ export default {
 
   .table {
     padding: 15px;
-    width: 100%;
+    width: 85vw;
   }
 
   .pagination {

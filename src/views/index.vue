@@ -10,6 +10,7 @@
       <el-menu active-text-color="#ffffff"
                class="menuContain"
                text-color="#ffffff"
+               :default-active="defaultTab"
                :collapse="isMenuExpand"
                :collapse-transition="true"
                @select="selectMenu"
@@ -103,9 +104,19 @@
         </div>
       </div>
       <div class="view">
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
+        <el-tabs v-model="defaultTab"
+                 @tab-remove="removeTab"
+                 closable
+                 type="card">
+          <el-tab-pane v-for="item in editableTabs"
+                       :label="item.title"
+                       :key="item.name"
+                       :name="item.name">
+          </el-tab-pane>
+        </el-tabs>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -118,16 +129,54 @@ export default {
   name: "home",
   data() {
     return {
-      isMenuExpand: false,
       isFullScreen: false,
       isTop: false, // 退出登录图标
+      // --- menu ---
+      isMenuExpand: false,
+      // --- tabs ---
       editableTabs: [{
         title: '基础信息',
-        name: '/baskInfo'
-      }]
+        name: '/baskInfo',
+      }],
+      tabNames: ['/baskInfo'],
+      defaultTab: '/baskInfo'
     }
   },
   methods: {
+    /**
+     * 获取tab的title
+     * @param index
+     * @returns {string}
+     */
+    getMenuItemTitle(index) {
+      switch (index) {
+        case '/baskInfo':
+          return '基础信息'
+        case '/role':
+          return '角色管理'
+        case '/adminSetting':
+          return '管理员设置'
+        case '/gradeClass':
+          return '年级/班级管理'
+        case '/dept':
+          return '教务处管理'
+        case '/subjects':
+          return '科目管理'
+        case '/teacher':
+          return '教师信息'
+        case '/team':
+          return '小组管理'
+        case '/student':
+          return '学生管理'
+        case '/parents':
+          return '家长管理'
+        case '/experts':
+          return '专家管理'
+        default:
+          break
+      }
+    },
+    // --- 事件 ---
     /**
      * 展开/收起菜单
      */
@@ -145,14 +194,26 @@ export default {
      * @param index
      */
     selectMenu(index) {
-      this.$router.push({path: index})
+      this.defaultTab = index
+      if (this.tabNames.indexOf(index) === -1) {
+        this.editableTabs.push({
+          name: index,
+          title: this.getMenuItemTitle(index)
+        })
+        this.tabNames.push(index)
+      }
     },
     /**
      * 关闭标签页
      * @param index
      */
     removeTab(index) {
-      console.log(index)
+      let i = this.tabNames.indexOf(index)
+      this.editableTabs.splice(i, 1)
+      this.tabNames.splice(i, 1)
+      if (this.defaultTab === index) {
+        this.defaultTab = this.tabNames[i - 1]
+      }
     }
   },
   watch: {
@@ -166,6 +227,13 @@ export default {
       } else {
         document.exitFullscreen()
       }
+    },
+    /**
+     * 路由跳转
+     * @param val
+     */
+    defaultTab(val) {
+      this.$router.push({path: val})
     }
   }
 }
@@ -258,6 +326,7 @@ export default {
 }
 
 .view {
-  width: 100%;
+  align-self: stretch;
+  padding: 0 15px;
 }
 </style>
