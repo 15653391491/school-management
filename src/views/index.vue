@@ -208,10 +208,17 @@ export default {
      * @param index
      */
     removeTab(index) {
+      if (this.tabNames.length === 1) {
+        return 1
+      }
       let i = this.tabNames.indexOf(index)
       this.editableTabs.splice(i, 1)
       this.tabNames.splice(i, 1)
       if (this.defaultTab === index) {
+        if (i === 0) {
+          this.defaultTab = this.tabNames[0]
+          return 1
+        }
         this.defaultTab = this.tabNames[i - 1]
       }
     }
