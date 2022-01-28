@@ -2,7 +2,7 @@
   <div class="box">
     <div class="form">
       <Form inline>
-        <el-form-item label="教务处名称">
+        <el-form-item label="专家名称">
           <Input/>
         </el-form-item>
         <el-form-item>
@@ -22,16 +22,12 @@
                          label="序号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="deptName"
-                         label="教务处名称">
+                         prop="name"
+                         label="姓名">
         </el-table-column>
         <el-table-column align="center"
                          prop="mobile"
                          label="联系方式">
-        </el-table-column>
-        <el-table-column align="center"
-                         prop="remark"
-                         label="备注">
         </el-table-column>
         <el-table-column align="center"
                          label="操作">
@@ -62,17 +58,18 @@
     </div>
     <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
-            title="添加教务处"
+            title="添加新专家"
             @close="addVisiable=false">
       <Form>
-        <el-form-item label="名称">
-          <Input v-model="addForm.name"/>
-        </el-form-item>
         <el-form-item label="联系方式">
-          <Input v-model="addForm.mobile"/>
+          <Input style="width: 180px" v-model="addForm.mobile"/>
         </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="addForm.remark"/>
+        <el-form-item label="密码">
+          <Input style="width: 180px;margin-right: 10px" v-model="addForm.remark"/>
+          <span>初始值：123456</span>
+        </el-form-item>
+        <el-form-item label="名称">
+          <Input style="width: 180px" v-model="addForm.name"/>
         </el-form-item>
         <el-form-item>
           <Button :type="'primary'">确定</Button>
@@ -82,17 +79,18 @@
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
-            title="添加教务处"
+            title="编辑专家"
             @close="editVisiable=false">
       <Form>
-        <el-form-item label="名称">
-          <Input v-model="editForm.name"/>
-        </el-form-item>
         <el-form-item label="联系方式">
-          <Input v-model="editForm.mobile"/>
+          <Input style="width: 180px" v-model="editForm.mobile"/>
         </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="editForm.remark"/>
+        <el-form-item label="密码">
+          <Input style="width: 180px;margin-right: 10px" v-model="editForm.remark"/>
+          <span>初始值：123456</span>
+        </el-form-item>
+        <el-form-item label="名称">
+          <Input style="width: 180px" v-model="editForm.name"/>
         </el-form-item>
         <el-form-item>
           <Button :type="'primary'">确定</Button>
@@ -110,8 +108,8 @@ export default {
     return {
       tableData: [
         {
-          name: '1111',
-          mobile: '15655555555',
+          name: '贾舒',
+          mobile: '15552662020',
           remark: '11111111'
         }
       ],
