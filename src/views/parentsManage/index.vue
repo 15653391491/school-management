@@ -13,32 +13,40 @@
     <div class="table">
       <el-table :data="tableData">
         <el-table-column align="center"
-                         prop="deptName"
+                         prop="studentId"
                          label="学生学号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="mobile"
+                         prop="studentName"
                          label="学生姓名">
         </el-table-column>
         <el-table-column align="center"
-                         prop="remark"
+                         prop="parentId"
                          label="家长序号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="remark"
+                         prop="parentName"
                          label="家长姓名">
         </el-table-column>
         <el-table-column align="center"
-                         prop="remark"
+                         prop="mobile"
                          label="联系方式">
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
                          label="主要监护人">
+          <template #default="scope">
+            <span v-show="scope.row.mainGuardian==='1'">是</span>
+            <span v-show="scope.row.mainGuardian==='2'">否</span>
+          </template>
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
                          label="激活状态">
+          <template #default="scope">
+            <span v-show="scope.row.isActive==='1'">激活</span>
+            <span v-show="scope.row.isActive==='2'">未激活</span>
+          </template>
         </el-table-column>
         <el-table-column align="center"
                          label="操作">
@@ -91,21 +99,43 @@
     <Dialog v-model="editVisiable"
             title="添加教务处"
             @close="editVisiable=false">
-      <Form>
-        <el-form-item label="名称">
-          <Input v-model="editForm.name"/>
-        </el-form-item>
-        <el-form-item label="联系方式">
-          <Input v-model="editForm.mobile"/>
-        </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="editForm.remark"/>
-        </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="editVisiable=false">取消</Button>
-        </el-form-item>
-      </Form>
+      <div class="row-wrapper editForm">
+        <Form>
+          <el-form-item label="学生序号">
+            <Input v-model="editForm.studentId"/>
+          </el-form-item>
+          <el-form-item label="家长账号">
+            <Input v-model="editForm.parentAccount"/>
+          </el-form-item>
+          <el-form-item label="账号密码">
+            <Input type="password" v-model="editForm.password"/>
+          </el-form-item>
+          <el-form-item label="主要监护人">
+            <Input v-model="editForm.parentName"/>
+          </el-form-item>
+        </Form>
+        <Form>
+          <el-form-item label="学生姓名">
+            <Input v-model="editForm.studentName"/>
+          </el-form-item>
+          <el-form-item label="家长名称">
+            <Input v-model="editForm.parentName"/>
+          </el-form-item>
+          <el-form-item label="联系方式">
+            <Input v-model="editForm.mobile"/>
+          </el-form-item>
+          <el-form-item label="激活状态">
+            <el-select v-model="editForm.isActive">
+              <el-option value="1" label="是"></el-option>
+              <el-option value="2" label="否"></el-option>
+            </el-select>
+          </el-form-item>
+        </Form>
+      </div>
+      <template #footer>
+        <Button type="primary">确认</Button>
+        <Button>取消</Button>
+      </template>
     </Dialog>
   </div>
 </template>
@@ -118,12 +148,14 @@ export default {
       tableData: [
         {
           studentId: '201921009003',
-          studentName:'张程',
-          parentId:'000005871',
-          parentName:'爸爸',
+          studentName: '张程',
+          parentId: '000005871',
+          parentName: '爸爸',
+          parentAccount:'',
           mobile: '18653360414',
-          mainGuardian:'1',
-          isActive:'1',
+          password:'123456',
+          mainGuardian: '1',
+          isActive: '1',
           remark: '11111111'
         }
       ],
@@ -199,4 +231,7 @@ export default {
   justify-content: center;
 }
 
+.editForm {
+  justify-content: space-between;
+}
 </style>
