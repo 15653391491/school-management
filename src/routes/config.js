@@ -6,63 +6,83 @@ export default {
         {
             path: '/',
             name: 'index',
-            redirect: 'baskInfo',
+            redirect: 'adminSetting',
             component: () => import('../views/index'),
             children: [
                 {
-                    path: '/dept',
-                    name: 'dept',
-                    component: () => import('../views/deptManage/index')
-                },
-                {
-                    path: '/experts',
-                    name: 'experts',
-                    component: () => import('../views/expertsManage/index')
-                },
-                {
-                    path: '/gradeClass',
-                    name: 'gradeClass',
-                    component: () => import('../views/gradeClassManage/index')
-                },
-                {
-                    path: '/parents',
-                    name: 'parents',
-                    component: () => import('../views/parentsManage/index')
-                },
-                {
                     path: '/adminSetting',
-                    name: 'adminSetting',
+                    name: '管理员账号管理',
                     component: () => import('../views/schoolManage/adminSetting')
                 },
                 {
-                    path: '/baskInfo',
-                    name: 'baskInfo',
-                    component: () => import('../views/schoolManage/basicInfo')
-                },
-                {
                     path: '/role',
-                    name: 'role',
+                    name: '角色管理',
                     component: () => import('../views/schoolManage/roleManage')
                 },
                 {
-                    path: '/student',
-                    name: 'student',
-                    component: () => import('../views/studentManage/index')
+                    path: '/schoolInfo',
+                    name: '学校管理',
+                    component: () => import('../views/schoolManage/basicInfo')
                 },
                 {
                     path: '/subjects',
-                    name: 'subjects',
+                    name: '学科学段',
                     component: () => import('../views/subjectsManage/index')
                 },
                 {
+                    path: '/gradeClass',
+                    name: '班级管理',
+                    component: () => import('../views/gradeClassManage/index')
+                },
+                {
                     path: '/teacher',
-                    name: 'teacher',
+                    name: '教师管理',
                     component: () => import('../views/teacherManage/teacherInfo')
                 },
                 {
-                    path: '/team',
-                    name: 'team',
-                    component: () => import('../views/teacherManage/teamManage')
+                    path: '/student',
+                    name: '学生管理',
+                    component: () => import('../views/studentManage/index')
+                },
+                {
+                    path: '/parents',
+                    name: '家长管理',
+                    component: () => import('../views/parentsManage/index')
+                },
+                {
+                    path: '/storage',
+                    name: '入库/出库',
+                    component: () => import('../views/storage/index')
+                },
+                {
+                    path: '/machineModel',
+                    name: '型号管理',
+                    component: () => import('../views/machineModel/index')
+                },
+                {
+                    path: '/bind',
+                    name: '绑定关系',
+                    component: () => import('../views/bind/index')
+                },
+                {
+                    path: '/returnManage',
+                    name: '退换货管理',
+                    component: () => import('../views/returnManage/index')
+                },
+                {
+                    path: '/inkStorge',
+                    name: '笔芯入库/出库',
+                    component: () => import('../views/inkStorge/index')
+                },
+                {
+                    path: '/textbookChapters',
+                    name: '教材章节',
+                    component: () => import('../views/textbookChapters/index')
+                },
+                {
+                    path: '/itemPool',
+                    name: '题库',
+                    component: () => import('../views/itemPool/index')
                 },
             ]
         },

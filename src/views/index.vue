@@ -3,7 +3,8 @@
     <div class="menu">
       <div class="col-wrapper menuTitle">
         <div v-show="!isMenuExpand" class="col-wrapper">
-          <span>学校管理后台</span>
+          <span>建享一板通</span>
+          <span style="margin-top: 5px">管理平台</span>
         </div>
         <Menu v-show="isMenuExpand"/>
       </div>
@@ -18,95 +19,37 @@
         <el-sub-menu class="subMenu" index="1">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
-            <span class="menuItem">学校管理</span>
+            <span class="menuItem">用户管理</span>
           </template>
-          <el-menu-item index="/baskInfo">基础信息</el-menu-item>
+          <el-menu-item index="/adminSetting">管理员账号管理</el-menu-item>
           <el-menu-item index="/role">角色管理</el-menu-item>
-          <el-menu-item index="/adminSetting">管理员设置</el-menu-item>
+          <el-menu-item index="/schoolInfo">学校管理</el-menu-item>
+          <el-menu-item index="/subjects">学科学段</el-menu-item>
+          <el-menu-item index="/gradeClass">班级管理</el-menu-item>
+          <el-menu-item index="/teacher">教师管理</el-menu-item>
+          <el-menu-item index="/student">学生管理</el-menu-item>
+          <el-menu-item index="/parents">家长管理</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/gradeClass">
-          <img src="../assets/static/menu/class.svg" class="icon" alt=""/>
-          <span class="menuItem">年级/班级管理</span>
-        </el-menu-item>
-        <el-menu-item index="/dept">
-          <img src="../assets/static/menu/warning.svg" class="icon" alt=""/>
-          <span class="menuItem">教务处管理</span>
-        </el-menu-item>
-        <el-menu-item index="/subjects">
-          <img src="../assets/static/menu/manageMent.svg" class="icon" alt=""/>
-          <span class="menuItem">科目管理</span>
-        </el-menu-item>
-        <el-sub-menu class="subMenu" index="6">
+        <el-sub-menu class="subMenu" index="2">
           <template #title>
-            <img class="icon" src="../assets/static/menu/book.svg" alt=""/>
-            <span class="menuItem">教师管理</span>
+            <img class="icon" src="../assets/static/home/school.svg" alt=""/>
+            <span class="menuItem">手写板管理</span>
           </template>
-          <el-menu-item index="/teacher">教师信息</el-menu-item>
-          <el-menu-item index="/team">小组管理</el-menu-item>
+          <el-menu-item index="/storage">入库/出库</el-menu-item>
+          <el-menu-item index="/machineModel">型号管理</el-menu-item>
+          <el-menu-item index="/bind">绑定关系</el-menu-item>
+          <el-menu-item index="/returnManage">退换货管理</el-menu-item>
+          <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/student">
-          <img src="../assets/static/menu/student.svg" class="icon" alt=""/>
-          <span class="menuItem">学生管理</span>
-        </el-menu-item>
-        <el-menu-item index="/parents">
-          <img src="../assets/static/menu/person.svg" class="icon" alt=""/>
-          <span class="menuItem">家长管理</span>
-        </el-menu-item>
-        <el-menu-item index="/experts">
-          <img src="../assets/static/menu/document.svg" class="icon" alt=""/>
-          <span class="menuItem">专家管理</span>
-        </el-menu-item>
+        <el-sub-menu class="subMenu" index="3">
+          <template #title>
+            <img class="icon" src="../assets/static/home/school.svg" alt=""/>
+            <span class="menuItem">教材管理</span>
+          </template>
+          <el-menu-item index="/textbookChapters">教材章节</el-menu-item>
+          <el-menu-item index="/itemPool">题库</el-menu-item>
+        </el-sub-menu>
       </el-menu>
-<!--      <el-menu active-text-color="#ffffff"-->
-<!--               class="menuContain"-->
-<!--               text-color="#ffffff"-->
-<!--               :default-active="defaultTab"-->
-<!--               :collapse="isMenuExpand"-->
-<!--               :collapse-transition="true"-->
-<!--               @select="selectMenu"-->
-<!--               background-color="#20222A">-->
-<!--        <el-sub-menu class="subMenu" index="1">-->
-<!--          <template #title>-->
-<!--            <img class="icon" src="../assets/static/home/school.svg" alt=""/>-->
-<!--            <span class="menuItem">学校管理</span>-->
-<!--          </template>-->
-<!--          <el-menu-item index="/baskInfo">基础信息</el-menu-item>-->
-<!--          <el-menu-item index="/role">角色管理</el-menu-item>-->
-<!--          <el-menu-item index="/adminSetting">管理员设置</el-menu-item>-->
-<!--        </el-sub-menu>-->
-<!--        <el-menu-item index="/gradeClass">-->
-<!--          <img src="../assets/static/menu/class.svg" class="icon" alt=""/>-->
-<!--          <span class="menuItem">年级/班级管理</span>-->
-<!--        </el-menu-item>-->
-<!--        <el-menu-item index="/dept">-->
-<!--          <img src="../assets/static/menu/warning.svg" class="icon" alt=""/>-->
-<!--          <span class="menuItem">教务处管理</span>-->
-<!--        </el-menu-item>-->
-<!--        <el-menu-item index="/subjects">-->
-<!--          <img src="../assets/static/menu/manageMent.svg" class="icon" alt=""/>-->
-<!--          <span class="menuItem">科目管理</span>-->
-<!--        </el-menu-item>-->
-<!--        <el-sub-menu class="subMenu" index="6">-->
-<!--          <template #title>-->
-<!--            <img class="icon" src="../assets/static/menu/book.svg" alt=""/>-->
-<!--            <span class="menuItem">教师管理</span>-->
-<!--          </template>-->
-<!--          <el-menu-item index="/teacher">教师信息</el-menu-item>-->
-<!--          <el-menu-item index="/team">小组管理</el-menu-item>-->
-<!--        </el-sub-menu>-->
-<!--        <el-menu-item index="/student">-->
-<!--          <img src="../assets/static/menu/student.svg" class="icon" alt=""/>-->
-<!--          <span class="menuItem">学生管理</span>-->
-<!--        </el-menu-item>-->
-<!--        <el-menu-item index="/parents">-->
-<!--          <img src="../assets/static/menu/person.svg" class="icon" alt=""/>-->
-<!--          <span class="menuItem">家长管理</span>-->
-<!--        </el-menu-item>-->
-<!--        <el-menu-item index="/experts">-->
-<!--          <img src="../assets/static/menu/document.svg" class="icon" alt=""/>-->
-<!--          <span class="menuItem">专家管理</span>-->
-<!--        </el-menu-item>-->
-<!--      </el-menu>-->
     </div>
     <div class="contain col-wrapper">
       <div class="header row-wrapper">
@@ -197,28 +140,36 @@ export default {
      */
     getMenuItemTitle(index) {
       switch (index) {
-        case '/baskInfo':
-          return '基础信息'
-        case '/role':
-          return '角色管理'
         case '/adminSetting':
           return '管理员设置'
-        case '/gradeClass':
-          return '年级/班级管理'
-        case '/dept':
-          return '教务处管理'
+        case '/role':
+          return '角色管理'
+        case '/schoolInfo':
+          return '学校管理'
         case '/subjects':
-          return '科目管理'
+          return '学科学段'
+        case '/gradeClass':
+          return '班级管理'
         case '/teacher':
-          return '教师信息'
-        case '/team':
-          return '小组管理'
+          return '教师管理'
         case '/student':
           return '学生管理'
         case '/parents':
           return '家长管理'
-        case '/experts':
-          return '专家管理'
+        case '/storage':
+          return '入库/出库'
+        case '/machineModel':
+          return '型号管理'
+        case '/bind':
+          return '绑定关系'
+        case '/returnManage':
+          return '退换货管理'
+        case '/inkStorge':
+          return '笔芯入库/出库'
+        case '/textbookChapters':
+          return '教材章节'
+        case '/itemPool':
+          return '题库'
         default:
           break
       }
