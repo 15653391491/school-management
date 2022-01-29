@@ -16,7 +16,7 @@
                :collapse-transition="true"
                @select="selectMenu"
                background-color="#20222A">
-        <el-sub-menu class="subMenu" index="1">
+        <el-sub-menu class="subMenu" index="用户管理">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
             <span class="menuItem">用户管理</span>
@@ -30,7 +30,7 @@
           <el-menu-item index="/student">学生管理</el-menu-item>
           <el-menu-item index="/parents">家长管理</el-menu-item>
         </el-sub-menu>
-        <el-sub-menu class="subMenu" index="2">
+        <el-sub-menu class="subMenu" index="手写板管理">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
             <span class="menuItem">手写板管理</span>
@@ -41,7 +41,7 @@
           <el-menu-item index="/returnManage">退换货管理</el-menu-item>
           <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>
         </el-sub-menu>
-        <el-sub-menu class="subMenu" index="3">
+        <el-sub-menu class="subMenu" index="教材管理">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
             <span class="menuItem">教材管理</span>
@@ -64,6 +64,10 @@
           <div class="iconContent">
             <RefreshLeft class="icon iconHover"/>
           </div>
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item v-for="item in breadCrumb" :key="item">{{ getMenuItemTitle(item) }}</el-breadcrumb-item>
+            <!--            <el-breadcrumb-item>{{ getMenuItemTitle(defaultTab) }}</el-breadcrumb-item>-->
+          </el-breadcrumb>
         </div>
         <!--    右侧图标    -->
         <div class="row-wrapper">
@@ -129,6 +133,7 @@ export default {
       // --- tabs ---
       editableTabs: [],
       tabNames: [],
+      breadCrumb: [],
       defaultTab: '/baskInfo'
     }
   },
@@ -171,7 +176,7 @@ export default {
         case '/itemPool':
           return '题库'
         default:
-          break
+          return index
       }
     },
     // --- 事件 ---
@@ -190,8 +195,9 @@ export default {
     /**
      * 菜单激活
      * @param index
+     * @param indexPath
      */
-    selectMenu(index) {
+    selectMenu(index, indexPath) {
       this.defaultTab = index
       if (this.tabNames.indexOf(index) === -1) {
         this.editableTabs.push({
@@ -199,6 +205,7 @@ export default {
           title: this.getMenuItemTitle(index)
         })
         this.tabNames.push(index)
+        this.breadCrumb = indexPath
       }
     },
     /**
