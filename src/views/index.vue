@@ -2,9 +2,12 @@
   <div class="minbox row-wrapper">
     <div class="menu">
       <div class="col-wrapper menuTitle">
-        <div v-show="!isMenuExpand" class="col-wrapper">
+        <div v-show="!isMenuExpand"
+             class="col-wrapper">
           <span>建享一板通</span>
-          <span style="margin-top: 5px">管理平台</span>
+          <span style="margin-top: 5px">
+            管理平台
+          </span>
         </div>
         <Menu v-show="isMenuExpand"/>
       </div>
@@ -16,16 +19,31 @@
                :collapse-transition="true"
                @select="selectMenu"
                background-color="#20222A">
-        <el-sub-menu class="subMenu" index="用户管理">
+        <el-sub-menu class="subMenu"
+                     index="用户管理">
           <template #title>
-            <img class="icon" src="../assets/static/home/school.svg" alt=""/>
-            <span class="menuItem">用户管理</span>
+            <img class="icon"
+                 src="../assets/static/home/school.svg"
+                 alt=""/>
+            <span class="menuItem">
+              用户管理
+            </span>
           </template>
-          <el-menu-item index="/adminSetting">管理员账号管理</el-menu-item>
-          <el-menu-item index="/role">角色管理</el-menu-item>
-          <el-menu-item index="/schoolInfo">学校管理</el-menu-item>
-          <el-menu-item index="/subjects">学科学段</el-menu-item>
-          <el-menu-item index="/gradeClass">班级管理</el-menu-item>
+          <el-menu-item index="/adminSetting">
+            管理员账号管理
+          </el-menu-item>
+          <el-menu-item index="/role">
+            角色管理
+          </el-menu-item>
+          <el-menu-item index="/schoolInfo">
+            学校管理
+          </el-menu-item>
+          <el-menu-item index="/subjects">
+            学科学段
+          </el-menu-item>
+          <el-menu-item index="/gradeClass">
+            班级管理
+          </el-menu-item>
           <el-menu-item index="/teacher">教师管理</el-menu-item>
           <el-menu-item index="/student">学生管理</el-menu-item>
           <el-menu-item index="/parents">家长管理</el-menu-item>
@@ -33,7 +51,9 @@
         <el-sub-menu class="subMenu" index="手写板管理">
           <template #title>
             <img class="icon" src="../assets/static/home/school.svg" alt=""/>
-            <span class="menuItem">手写板管理</span>
+            <span class="menuItem">
+              手写板管理
+            </span>
           </template>
           <el-menu-item index="/storage">入库/出库</el-menu-item>
           <el-menu-item index="/machineModel">型号管理</el-menu-item>
@@ -41,13 +61,22 @@
           <el-menu-item index="/returnManage">退换货管理</el-menu-item>
           <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>
         </el-sub-menu>
-        <el-sub-menu class="subMenu" index="教材管理">
+        <el-sub-menu class="subMenu"
+                     index="教材管理">
           <template #title>
-            <img class="icon" src="../assets/static/home/school.svg" alt=""/>
-            <span class="menuItem">教材管理</span>
+            <img class="icon"
+                 src="../assets/static/home/school.svg"
+                 alt=""/>
+            <span class="menuItem">
+              教材管理
+            </span>
           </template>
-          <el-menu-item index="/textbookChapters">教材章节</el-menu-item>
-          <el-menu-item index="/itemPool">题库</el-menu-item>
+          <el-menu-item index="/textbookChapters">
+            教材章节
+          </el-menu-item>
+          <el-menu-item index="/itemPool">
+            题库
+          </el-menu-item>
         </el-sub-menu>
       </el-menu>
     </div>
@@ -55,29 +84,43 @@
       <div class="header row-wrapper">
         <!--    左侧图标    -->
         <div class="row-wrapper">
-          <div class="iconContent" v-show="isMenuExpand" @click="expandMenu">
+          <div class="iconContent"
+               v-show="isMenuExpand"
+               @click="expandMenu">
             <Expand class="icon iconHover"/>
           </div>
-          <div class="iconContent" v-show="!isMenuExpand" @click="expandMenu">
+          <div class="iconContent"
+               v-show="!isMenuExpand"
+               @click="expandMenu">
             <Fold class="icon iconHover"/>
           </div>
           <div class="iconContent">
             <RefreshLeft class="icon iconHover"/>
           </div>
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item v-for="item in breadCrumb" :key="item">{{ getMenuItemTitle(item) }}</el-breadcrumb-item>
-            <!--            <el-breadcrumb-item>{{ getMenuItemTitle(defaultTab) }}</el-breadcrumb-item>-->
+            <el-breadcrumb-item v-for="item in breadCrumb"
+                                :key="item">
+              {{ getMenuItemTitle(item) }}
+            </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <!--    右侧图标    -->
         <div class="row-wrapper">
           <!--     打开/关闭全屏     -->
           <div class="iconContent">
-            <div @click="fullScreen" class="iconHover" v-show="!isFullScreen">
-              <img src="../assets/static/menu/fullScreen.svg" class="icon" alt="全屏"/>
+            <div @click="fullScreen"
+                 class="iconHover"
+                 v-show="!isFullScreen">
+              <img src="../assets/static/menu/fullScreen.svg"
+                   class="icon"
+                   alt="全屏"/>
             </div>
-            <div @click="fullScreen" class="iconHover" v-show="isFullScreen">
-              <img src="../assets/static/menu/cancelFullScreen.svg" class="icon" alt="全屏"/>
+            <div @click="fullScreen"
+                 class="iconHover"
+                 v-show="isFullScreen">
+              <img src="../assets/static/menu/cancelFullScreen.svg"
+                   class="icon"
+                   alt="全屏"/>
             </div>
           </div>
           <!--    退出登录      -->
@@ -86,15 +129,22 @@
                       placement="bottom"
                       trigger="hover">
             <template #reference>
-              <div @mousemove="isTop=true" @mouseout="isTop=false" class="iconContent row-wrapper">
+              <div @mousemove="isTop=true"
+                   @mouseout="isTop=false"
+                   class="iconContent row-wrapper">
                 <span>管理员</span>
-                <CaretTop v-show="isTop" class="icon"/>
-                <CaretBottom v-show="!isTop" class="icon"/>
+                <CaretTop v-show="isTop"
+                          class="icon"/>
+                <CaretBottom v-show="!isTop"
+                             class="icon"/>
               </div>
             </template>
             <template #default>
-              <div style="width:100%" class="col-wrapper">
-                <el-button>退出</el-button>
+              <div style="width:100%"
+                   class="col-wrapper">
+                <el-button>
+                  退出
+                </el-button>
               </div>
             </template>
           </el-popover>
