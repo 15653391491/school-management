@@ -1,5 +1,5 @@
 <template>
-  <el-input v-bind="$attrs"/>
+  <el-input class="input" v-bind="$attrs"/>
 </template>
 
 <script>
@@ -9,5 +9,7 @@ export default {
 </script>
 
 <style scoped>
-
+.input {
+  width: 214px;
+}
 </style>

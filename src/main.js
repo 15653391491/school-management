@@ -10,7 +10,8 @@ import 'element-plus/dist/index.css'
 // --- utils ---
 import iconMixin from "@/components/iconMixin";
 import './styles/flax.css'
-
+// --- 右键 ---
+// import VueContextMenu from 'vue-contextmenu'
 const app = createApp(App)
 app.config.globalProperties.$store = store
 app.config.globalProperties.$qs = qs
@@ -19,6 +20,7 @@ app.mixin(utils)
 app.use(ElementPlus)
 app.use(routes)
 app.use(store)
+// app.use(VueContextMenu)
 
 // app.use(ElementPlus)
 app.mount('#app')

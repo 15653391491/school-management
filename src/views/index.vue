@@ -166,6 +166,7 @@
         </keep-alive>
       </div>
     </div>
+    <div class="contextMenu"></div>
   </div>
 </template>
 
@@ -184,7 +185,8 @@ export default {
       editableTabs: [],
       tabNames: [],
       breadCrumb: [],
-      defaultTab: '/baskInfo'
+      defaultTab: '/baskInfo',
+      //  --- 右键菜单 ---
     }
   },
   methods: {

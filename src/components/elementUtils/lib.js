@@ -10,6 +10,7 @@ import CheckboxGroup from './components/element-ui/CheckboxGroup'
 import Pagination from './components/element-ui/Pagination'
 import ConfigProvider from "./components/element-ui/ConfigProvider";
 import Divider from './components/element-ui/Divider'
+import VueContextMenu from 'vue-contextmenu'
 export default {
     components: {
         UploadImg,
@@ -23,6 +24,7 @@ export default {
         CheckboxGroup,
         Pagination,
         ConfigProvider,
-        Divider
+        Divider,
+        VueContextMenu
     }
 }
