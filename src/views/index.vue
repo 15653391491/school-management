@@ -259,7 +259,7 @@ export default {
      */
     closeOther() {
       this.editableTabs = [this.tabInfo]
-      this.tabNames = this.tabNames.slice(0, this.tabNames.indexOf(this.tabInfo.name) + 1)
+      this.tabNames = [this.tabInfo.name]
       this.defaultTab = this.tabInfo.name
     },
     /**
