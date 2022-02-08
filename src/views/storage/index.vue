@@ -85,7 +85,7 @@
                              @confirm="del(scope.row)"
                              :title="'确认出库设备'+scope.row.studentId+'吗?'">
                 <template #reference>
-                  <Button size="small" :type="'error'">出库</Button>
+                  <Button size="small" :type="'danger'">出库</Button>
                 </template>
               </el-popconfirm>
               <Button size="small" @click="edit(scope.row)" :type="'primary'">出入库历史记录</Button>

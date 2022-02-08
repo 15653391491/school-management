@@ -153,6 +153,7 @@
       <div class="view">
         <el-tabs v-model="defaultTab"
                  @tab-remove="removeTab"
+                 @tab-click="tabClick"
                  closable
                  type="card">
           <el-tab-pane v-for="item in editableTabs"
@@ -160,13 +161,15 @@
                        :key="item.name"
                        :name="item.name">
             <template #label>
-              <span @contextmenu="e=>{onContextMenu(e,item)}">{{ item.title }}</span>
+              <span style="height: 100%" @contextmenu="e=>{onContextMenu(e,item)}">{{ item.title }}</span>
             </template>
           </el-tab-pane>
         </el-tabs>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view v-slot="{Component}">
+          <keep-alive>
+            <component :is="Component"/>
+          </keep-alive>
+        </router-view>
       </div>
     </div>
     <div :style="{left:contextMenuData.x+'px',top:contextMenuData.y+'px'}"
@@ -247,6 +250,15 @@ export default {
     },
     // --- 事件 ---
     /**
+     * tab被点击
+     * @param info
+     */
+    tabClick(info) {
+      // console.log(this.editableTabs[info.index])
+      this.breadCrumb = this.editableTabs[info.index].indexPath
+      // this.breadCrumb = info.indexPath
+    },
+    /**
      * 关闭右侧
      */
     closeRight() {
@@ -296,8 +308,10 @@ export default {
       if (this.tabNames.indexOf(index) === -1) {
         this.editableTabs.push({
           name: index,
-          title: this.getMenuItemTitle(index)
+          title: this.getMenuItemTitle(index),
+          indexPath
         })
+        this.$store.commit('setIndexPath', indexPath)
         this.tabNames.push(index)
         this.breadCrumb = indexPath
       }
@@ -342,12 +356,14 @@ export default {
       this.$router.push({path: val})
     }
   },
-  created() {
+  activated() {
     this.defaultTab = this.$route.path
     this.editableTabs.push({
       title: this.getMenuItemTitle(this.defaultTab),
       name: this.defaultTab,
+      indexPath: this.$store.state.indexPath
     })
+    this.breadCrumb = this.$store.state.indexPath
     this.tabNames.push(this.defaultTab)
   }
 }

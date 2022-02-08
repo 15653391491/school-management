@@ -4,7 +4,8 @@ export const store = createStore({
     state: {
         name: '',
         count: 0,
-        token: ''
+        token: '',
+        indexPath: []
     },
     mutations: {
         setName(state, data) {
@@ -15,6 +16,9 @@ export const store = createStore({
         },
         setToken(state, data) {
             state.token = data
+        },
+        setIndexPath(state, data) {
+            state.indexPath = data
         }
     },
 })

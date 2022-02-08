@@ -21,7 +21,7 @@
                            @confirm="del(scope.row)"
                            :title="'确认删除'+scope.row.userName+'吗?'">
               <template #reference>
-                <Button size="small" type="error">删除</Button>
+                <Button size="small" type="danger">删除</Button>
               </template>
             </el-popconfirm>
           </div>
