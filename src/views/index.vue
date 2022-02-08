@@ -251,7 +251,7 @@ export default {
      */
     closeRight() {
       this.editableTabs = this.editableTabs.slice(0, this.editableTabs.indexOf(this.tabInfo) + 1)
-      this.tabNames = this.tabNames.slice(0, this.tabNames.indexOf(this.tabInfo) + 1)
+      this.tabNames = this.tabNames.slice(0, this.tabNames.indexOf(this.tabInfo.name) + 1)
       this.defaultTab = this.tabInfo.name
     },
     /**
@@ -259,7 +259,7 @@ export default {
      */
     closeOther() {
       this.editableTabs = [this.tabInfo]
-      this.tabNames = this.tabNames.slice(0, this.tabNames.indexOf(this.tabInfo) + 1)
+      this.tabNames = this.tabNames.slice(0, this.tabNames.indexOf(this.tabInfo.name) + 1)
       this.defaultTab = this.tabInfo.name
     },
     /**
