@@ -2,11 +2,35 @@
   <div class="box">
     <div class="form">
       <Form inline>
-        <el-form-item label="家长名称">
+        <el-form-item label="设备编号">
           <Input/>
         </el-form-item>
+        <el-form-item label="设备型号">
+          <el-select>
+            <el-option label="a-001" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="入库时间">
+          <el-date-picker type="date">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="出库时间">
+          <el-date-picker type="date">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="入库人">
+          <el-select>
+            <el-option label="张三" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="出库人">
+          <el-select>
+            <el-option label="张三" value="1"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item>
-          <Button type="success">搜索</Button>
+          <Button :type="'success'">搜索</Button>
+          <Button @click="add" type="primary">入库新设备</Button>
         </el-form-item>
       </Form>
     </div>
@@ -14,27 +38,31 @@
       <el-table :data="tableData">
         <el-table-column align="center"
                          prop="studentId"
-                         label="学生学号">
+                         label="设备编号">
         </el-table-column>
         <el-table-column align="center"
                          prop="studentName"
-                         label="学生姓名">
+                         label="设备型号">
         </el-table-column>
         <el-table-column align="center"
                          prop="parentId"
-                         label="家长序号">
+                         label="入库时间">
         </el-table-column>
         <el-table-column align="center"
                          prop="parentName"
-                         label="家长姓名">
+                         label="入库人">
+        </el-table-column>
+        <el-table-column align="center"
+                         prop="parentId"
+                         label="出库时间">
         </el-table-column>
         <el-table-column align="center"
                          prop="mobile"
-                         label="联系方式">
+                         label="出库人">
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
-                         label="主要监护人">
+                         label="出库入库状态">
           <template #default="scope">
             <span v-show="scope.row.mainGuardian==='1'">是</span>
             <span v-show="scope.row.mainGuardian==='2'">否</span>
@@ -42,7 +70,7 @@
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
-                         label="激活状态">
+                         label="备注">
           <template #default="scope">
             <span v-show="scope.row.isActive==='1'">激活</span>
             <span v-show="scope.row.isActive==='2'">未激活</span>
@@ -52,15 +80,15 @@
                          label="操作">
           <template #default="scope">
             <div class="row-wrapper option">
-              <Button size="small" @click="edit(scope.row)" :type="'success'">编辑</Button>
               <el-popconfirm confirm-button-text="确定"
                              cancel-button-text="取消"
                              @confirm="del(scope.row)"
-                             :title="'确认删除吗?'">
+                             :title="'确认出库设备'+scope.row.studentId+'吗?'">
                 <template #reference>
-                  <Button size="small" :type="'error'">删除</Button>
+                  <Button size="small" :type="'error'">出库</Button>
                 </template>
               </el-popconfirm>
+              <Button size="small" @click="edit(scope.row)" :type="'primary'">出入库历史记录</Button>
             </div>
           </template>
         </el-table-column>
@@ -77,17 +105,20 @@
     </div>
     <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
-            title="添加教务处"
+            title="上架新设备"
+            width="20vw"
             @close="addVisiable=false">
       <Form>
-        <el-form-item label="名称">
+        <el-form-item label="设备编号">
           <Input v-model="addForm.name"/>
         </el-form-item>
-        <el-form-item label="联系方式">
-          <Input v-model="addForm.mobile"/>
+        <el-form-item label="设备型号">
+          <el-select>
+            <el-option value="1" label="a-001"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="备注">
-          <Input type="textarea" v-model="addForm.remark"/>
+          <Input :type="'textarea'" v-model="addForm.remark"/>
         </el-form-item>
         <el-form-item>
           <Button :type="'primary'">确定</Button>
@@ -97,43 +128,30 @@
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
-            title="添加教务处"
+            :title="'设备 '+editForm.studentId + ' 出入库历史记录'"
+            width="60vw"
             @close="editVisiable=false">
-      <div class="row-wrapper editForm">
-        <Form>
-          <el-form-item label="学生序号">
-            <Input v-model="editForm.studentId"/>
-          </el-form-item>
-          <el-form-item label="家长账号">
-            <Input v-model="editForm.parentAccount"/>
-          </el-form-item>
-          <el-form-item label="账号密码">
-            <Input type="password" v-model="editForm.password"/>
-          </el-form-item>
-          <el-form-item label="主要监护人">
-            <Input v-model="editForm.parentName"/>
-          </el-form-item>
-        </Form>
-        <Form>
-          <el-form-item label="学生姓名">
-            <Input v-model="editForm.studentName"/>
-          </el-form-item>
-          <el-form-item label="家长名称">
-            <Input v-model="editForm.parentName"/>
-          </el-form-item>
-          <el-form-item label="联系方式">
-            <Input v-model="editForm.mobile"/>
-          </el-form-item>
-          <el-form-item label="激活状态">
-            <el-select v-model="editForm.isActive">
-              <el-option value="1" label="是"></el-option>
-              <el-option value="2" label="否"></el-option>
-            </el-select>
-          </el-form-item>
-        </Form>
+      <div class="col-wrapper editForm">
+        <el-table>
+          <el-table-column align="center"
+                           label="时间">
+          </el-table-column>
+          <el-table-column align="center"
+                           label="出库/入库">
+          </el-table-column>
+          <el-table-column align="center"
+                           label="操作人">
+          </el-table-column>
+        </el-table>
+        <Pagination v-model:currentPage="page.page"
+                    :total="page.total"
+                    :page-size="page.limit"
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange">
+        </Pagination>
       </div>
       <template #footer>
-        <Button type="primary">确认</Button>
+        <Button :type="'primary'">确认</Button>
         <Button>取消</Button>
       </template>
     </Dialog>
@@ -151,9 +169,9 @@ export default {
           studentName: '张程',
           parentId: '000005871',
           parentName: '爸爸',
-          parentAccount:'',
+          parentAccount: '',
           mobile: '18653360414',
-          password:'123456',
+          password: '123456',
           mainGuardian: '1',
           isActive: '1',
           remark: '11111111'
