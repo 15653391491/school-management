@@ -247,7 +247,6 @@ export default {
     },
     // --- 事件 ---
     closeRight() {
-      console.log(this.editableTabs.indexOf(this.tabInfo))
       this.editableTabs = this.editableTabs.slice(0, this.editableTabs.indexOf(this.tabInfo)+1)
       this.tabNames = this.tabInfo.name
       this.defaultTab = this.tabInfo.name
