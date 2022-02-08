@@ -12,4 +12,5 @@ export default {
 .input {
   width: 214px;
 }
+
 </style>

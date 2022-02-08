@@ -1,5 +1,5 @@
 <template>
-  <div class="minbox row-wrapper">
+  <div class="minbox row-wrapper" @click="contextMenuData.show=false">
     <div class="menu">
       <div class="col-wrapper menuTitle">
         <div v-show="!isMenuExpand"
@@ -159,6 +159,9 @@
                        :label="item.title"
                        :key="item.name"
                        :name="item.name">
+            <template #label>
+              <span @contextmenu="e=>{onContextMenu(e,item)}">{{ item.title }}</span>
+            </template>
           </el-tab-pane>
         </el-tabs>
         <keep-alive>
@@ -166,7 +169,12 @@
         </keep-alive>
       </div>
     </div>
-    <div class="contextMenu"></div>
+    <div :style="{left:contextMenuData.x+'px',top:contextMenuData.y+'px'}"
+         v-show="contextMenuData.show"
+         class="contextMenu col-wrapper">
+      <div class="row-wrapper context-item" @click="closeOther">关闭其他</div>
+      <div class="row-wrapper context-item" @click="closeRight">关闭右侧</div>
+    </div>
   </div>
 </template>
 
@@ -187,6 +195,12 @@ export default {
       breadCrumb: [],
       defaultTab: '/baskInfo',
       //  --- 右键菜单 ---
+      contextMenuData: {
+        x: 0,
+        y: 0,
+        show: false
+      },
+      tabInfo: {}
     }
   },
   methods: {
@@ -232,6 +246,32 @@ export default {
       }
     },
     // --- 事件 ---
+    closeRight() {
+      console.log(this.editableTabs.indexOf(this.tabInfo))
+      this.editableTabs = this.editableTabs.slice(0, this.editableTabs.indexOf(this.tabInfo)+1)
+      this.tabNames = this.tabInfo.name
+      this.defaultTab = this.tabInfo.name
+    },
+    /**
+     * 关闭其他
+     */
+    closeOther() {
+      this.editableTabs = [this.tabInfo]
+      this.tabNames = this.tabInfo.name
+      this.defaultTab = this.tabInfo.name
+    },
+    /**
+     * 打开右键菜单
+     * @param e
+     * @param info
+     */
+    onContextMenu(e, info) {
+      e.preventDefault()
+      this.contextMenuData.show = true
+      this.contextMenuData.x = e.clientX
+      this.contextMenuData.y = e.clientY
+      this.tabInfo = info
+    },
     /**
      * 展开/收起菜单
      */
@@ -400,5 +440,25 @@ export default {
 .view {
   align-self: stretch;
   padding: 0 15px;
+}
+
+.contextMenu {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 100;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.context-item {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 5px 15px;
+  transition: all .5s;
+}
+
+.context-item:hover {
+  cursor: pointer;
+  background-color: #eee;
 }
 </style>

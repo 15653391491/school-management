@@ -100,6 +100,15 @@
         <el-form-item label="地址">
           <Input v-model="addForm.address"/>
         </el-form-item>
+        <el-form-item label="班级数">
+          <Input type="number" v-model="addForm.classNum"/>
+        </el-form-item>
+        <el-form-item label="学生数" >
+          <Input type="number" v-model="addForm.studentNum"/>
+        </el-form-item>
+        <el-form-item label="老师数">
+          <Input type="number" v-model="addForm.teacherNum"/>
+        </el-form-item>
         <el-form-item>
           <Button type="primary">保存</Button>
           <Button @click="editRoleVisiable=false">取消</Button>
@@ -109,17 +118,43 @@
     <!--  编辑弹窗  -->
     <Dialog v-model="editRoleVisiable"
             title="编辑角色"
+            width="20vw"
             @close="editRoleVisiable=false">
       <Form>
-        <el-form-item label="角色名称">
+        <el-form-item label="学校名称">
           <Input v-model="editForm.name"/>
         </el-form-item>
-        <el-form-item label="权限">
-          <CheckboxGroup @change="permissionChange" v-model="editForm.permissions">
-            <Checkbox v-for="(item,index) in permissions" :label="index" :key="index">
-              {{ item.label }}
-            </Checkbox>
-          </CheckboxGroup>
+        <el-form-item label="省">
+          <el-select v-model="editForm.province">
+            <el-option label="山东省" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="市">
+          <el-select v-model="editForm.city">
+            <el-option label="淄博市" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="区">
+          <el-select v-model="editForm.county">
+            <el-option label="张店区" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="学段学制">
+          <el-select v-model="editForm.stageNum">
+            <el-option label="高中三年制" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="地址">
+          <Input v-model="editForm.address"/>
+        </el-form-item>
+        <el-form-item label="班级数">
+          <Input type="number" v-model="editForm.classNum"/>
+        </el-form-item>
+        <el-form-item label="学生数" >
+          <Input type="number" v-model="editForm.studentNum"/>
+        </el-form-item>
+        <el-form-item label="老师数">
+          <Input type="number" v-model="editForm.teacherNum"/>
         </el-form-item>
         <el-form-item>
           <Button type="primary">保存</Button>
@@ -214,13 +249,24 @@ export default {
         county: '1',
         stage: '高中三年制',
         stageNum: '1',
-        address: ''
+        address: '',
+        classNum: undefined,
+        studentNum: undefined,
+        teacherNum: undefined,
       },
       // --- 修改角色 ---
       editRoleVisiable: false,
       editForm: {
         name: '',
-        permissions: []
+        city: '1',
+        province: '1',
+        county: '1',
+        stage: '高中三年制',
+        stageNum: '1',
+        address: '',
+        classNum: undefined,
+        studentNum: undefined,
+        teacherNum: undefined,
       }
     }
   },
