@@ -55,36 +55,32 @@
                          label="设备型号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="parentId"
+                         prop="putinTime"
                          label="入库时间">
         </el-table-column>
         <el-table-column align="center"
-                         prop="parentName"
+                         prop="putinPerson"
                          label="入库人">
         </el-table-column>
         <el-table-column align="center"
-                         prop="parentId"
+                         prop="putoutTime"
                          label="出库时间">
         </el-table-column>
         <el-table-column align="center"
-                         prop="mobile"
+                         prop="outputPerson"
                          label="出库人">
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
                          label="出库入库状态">
           <template #default="scope">
-            <span v-show="scope.row.mainGuardian==='1'">是</span>
-            <span v-show="scope.row.mainGuardian==='2'">否</span>
+            <span v-show="scope.row.mainGuardian==='1'">已入库</span>
+            <span v-show="scope.row.mainGuardian==='2'">已出库</span>
           </template>
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
                          label="备注">
-          <template #default="scope">
-            <span v-show="scope.row.isActive==='1'">激活</span>
-            <span v-show="scope.row.isActive==='2'">未激活</span>
-          </template>
         </el-table-column>
         <el-table-column align="center"
                          label="操作">
@@ -178,10 +174,11 @@ export default {
           machineType: '手写板',
           studentId: '201921009003',
           machineCode: 'a-001',
-          parentId: '000005871',
-          parentName: '爸爸',
+          putinTime: '2020-02-09 16:43:00',
+          putoutTime: '2020-02-09 16:43:00',
+          putinPerson: '张三',
           parentAccount: '',
-          mobile: '18653360414',
+          outputPerson: '张三',
           password: '123456',
           mainGuardian: '1',
           isActive: '1',
@@ -190,11 +187,12 @@ export default {
         {
           machineType: '笔芯',
           studentId: '201921009003',
-          machineCode: '张程',
-          parentId: '000005871',
-          parentName: '爸爸',
+          machineCode: 'a-002',
+          putinTime: '2020-02-09 16:43:00',
+          putinPerson: '李四',
+          putoutTime: '2020-02-09 16:43:00',
           parentAccount: '',
-          mobile: '18653360414',
+          outputPerson: '李四',
           password: '123456',
           mainGuardian: '1',
           isActive: '1',
