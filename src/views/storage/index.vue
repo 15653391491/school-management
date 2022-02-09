@@ -36,14 +36,14 @@
         </el-form-item>
         <el-form-item>
           <Button :type="'success'">搜索</Button>
-          <Button @click="add" type="primary">入库新设备</Button>
+          <Button @click="add" :type="'primary'">入库新设备</Button>
         </el-form-item>
       </Form>
     </div>
     <div class="table">
       <el-table :data="tableData">
         <el-table-column align="center"
-                         prop="studentId"
+                         prop="machineType"
                          label="设备类型">
         </el-table-column>
         <el-table-column align="center"
@@ -51,7 +51,7 @@
                          label="设备编号">
         </el-table-column>
         <el-table-column align="center"
-                         prop="studentName"
+                         prop="machineCode"
                          label="设备型号">
         </el-table-column>
         <el-table-column align="center"
@@ -175,8 +175,22 @@ export default {
     return {
       tableData: [
         {
+          machineType: '手写板',
           studentId: '201921009003',
-          studentName: '张程',
+          machineCode: 'a-001',
+          parentId: '000005871',
+          parentName: '爸爸',
+          parentAccount: '',
+          mobile: '18653360414',
+          password: '123456',
+          mainGuardian: '1',
+          isActive: '1',
+          remark: '11111111'
+        },
+        {
+          machineType: '笔芯',
+          studentId: '201921009003',
+          machineCode: '张程',
           parentId: '000005871',
           parentName: '爸爸',
           parentAccount: '',
