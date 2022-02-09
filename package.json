@@ -20,6 +20,7 @@
     "vue-contextmenu": "^1.5.11",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0",
     "yak-contextmenu": "^1.0.1"
   },
   "devDependencies": {

@@ -304,16 +304,17 @@ export default {
      * @param indexPath
      */
     selectMenu(index, indexPath) {
+      this.breadCrumb = indexPath //面包屑
       this.defaultTab = index
+      this.$store.commit('setIndexPath', indexPath)
+      console.log(this.$store.state)
       if (this.tabNames.indexOf(index) === -1) {
         this.editableTabs.push({
           name: index,
           title: this.getMenuItemTitle(index),
           indexPath
         })
-        this.$store.commit('setIndexPath', indexPath)
         this.tabNames.push(index)
-        this.breadCrumb = indexPath
       }
     },
     /**
@@ -363,6 +364,7 @@ export default {
       name: this.defaultTab,
       indexPath: this.$store.state.indexPath
     })
+    console.log(this.$store.state)
     this.breadCrumb = this.$store.state.indexPath
     this.tabNames.push(this.defaultTab)
   }
