@@ -32,7 +32,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="订单号">
-          <Input />
+          <Input/>
         </el-form-item>
         <el-form-item>
           <Button type="success">搜索</Button>
@@ -142,16 +142,17 @@
         <el-form-item label="退换货日期">
           <el-date-picker type="date"/>
         </el-form-item>
-        <el-form-item label="处理状态">
-          <el-select>
-            <el-option label="已完成" value="1"></el-option>
-            <el-option label="未完成" value="2"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="订单号">
-          <Input />
+          <Input/>
         </el-form-item>
-        <el-form-item>
+        <el-form-item label="收货地址">
+          <Input/>
+        </el-form-item>
+        <el-form-item label="收货人联系方式">
+          <Input/>
+        </el-form-item>
+        <el-form-item label="备注">
+          <Input type="textarea"/>
         </el-form-item>
       </Form>
       <template #footer>
@@ -161,38 +162,48 @@
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
-            title="添加教务处"
+            title="编辑退换货"
+            width="20vw"
             @close="editVisiable=false">
       <div class="row-wrapper editForm">
         <Form>
-          <el-form-item label="学生序号">
-            <Input v-model="editForm.studentId"/>
-          </el-form-item>
-          <el-form-item label="家长账号">
-            <Input v-model="editForm.parentAccount"/>
-          </el-form-item>
-          <el-form-item label="账号密码">
-            <Input type="password" v-model="editForm.password"/>
-          </el-form-item>
-          <el-form-item label="主要监护人">
-            <Input v-model="editForm.parentName"/>
-          </el-form-item>
-        </Form>
-        <Form>
-          <el-form-item label="学生姓名">
-            <Input v-model="editForm.studentName"/>
-          </el-form-item>
-          <el-form-item label="家长名称">
-            <Input v-model="editForm.parentName"/>
-          </el-form-item>
-          <el-form-item label="联系方式">
-            <Input v-model="editForm.mobile"/>
-          </el-form-item>
-          <el-form-item label="激活状态">
-            <el-select v-model="editForm.isActive">
-              <el-option value="1" label="是"></el-option>
-              <el-option value="2" label="否"></el-option>
+          <el-form-item label="退换货类型">
+            <el-select>
+              <el-option label="退货" value="1"></el-option>
+              <el-option label="换货" value="2"></el-option>
             </el-select>
+          </el-form-item>
+          <el-form-item label="退换货是否已经完成">
+            <el-switch v-model="editForm.finish" />
+          </el-form-item>
+          <el-form-item label="设备类型">
+            <el-select>
+              <el-option label="手写板" value="1"></el-option>
+              <el-option label="笔芯" value="2"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="设备编号">
+            <Input/>
+          </el-form-item>
+          <el-form-item label="设备型号">
+            <el-select>
+              <el-option label="a-001" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="退换货日期">
+            <el-date-picker type="date"/>
+          </el-form-item>
+          <el-form-item label="订单号">
+            <Input/>
+          </el-form-item>
+          <el-form-item label="收货地址">
+            <Input/>
+          </el-form-item>
+          <el-form-item label="收货人联系方式">
+            <Input/>
+          </el-form-item>
+          <el-form-item label="备注">
+            <Input type="textarea"/>
           </el-form-item>
         </Form>
       </div>
@@ -237,7 +248,9 @@ export default {
       },
       //  --- 编辑弹窗 ---
       editVisiable: false,
-      editForm: {}
+      editForm: {
+        finish: false
+      }
     }
   },
   methods: {

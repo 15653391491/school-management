@@ -59,7 +59,7 @@
           <el-menu-item index="/machineModel">型号管理</el-menu-item>
           <el-menu-item index="/bind">绑定关系</el-menu-item>
           <el-menu-item index="/returnManage">退换货管理</el-menu-item>
-          <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>
+<!--          <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>-->
         </el-sub-menu>
         <el-sub-menu class="subMenu"
                      index="教材管理">

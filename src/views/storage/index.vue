@@ -2,6 +2,12 @@
   <div class="box">
     <div class="form">
       <Form inline>
+        <el-form-item label="设备类型">
+          <el-select>
+            <el-option label="手写板" value="1"></el-option>
+            <el-option label="笔芯" value="2"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="设备编号">
           <Input/>
         </el-form-item>
@@ -36,6 +42,10 @@
     </div>
     <div class="table">
       <el-table :data="tableData">
+        <el-table-column align="center"
+                         prop="studentId"
+                         label="设备类型">
+        </el-table-column>
         <el-table-column align="center"
                          prop="studentId"
                          label="设备编号">
