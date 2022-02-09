@@ -144,6 +144,9 @@ export default {
       editForm: {}
     }
   },
+  activated() {
+    this.$store.commit('setIndexPath', ['用户管理', '/adminSetting'])
+  },
   methods: {
     /**
      * 修改管理员
