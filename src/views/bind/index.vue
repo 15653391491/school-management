@@ -2,11 +2,31 @@
   <div class="box">
     <div class="form">
       <Form inline>
-        <el-form-item label="家长名称">
+        <el-form-item label="设备编号">
           <Input/>
+        </el-form-item>
+        <el-form-item label="设备型号">
+          <el-select>
+            <el-option label="a-001" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="学生学号">
+          <Input/>
+        </el-form-item>
+        <el-form-item label="学生姓名">
+          <Input/>
+        </el-form-item>
+        <el-form-item label="绑定时间段">
+          <el-date-picker v-model="form.range" type="datetimerange" />
+        </el-form-item>
+        <el-form-item label="操作人">
+          <el-select>
+            <el-option label="张三" value="1"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item>
           <Button type="success">搜索</Button>
+          <Button @click="add" :type="'primary'">新增</Button>
         </el-form-item>
       </Form>
     </div>
@@ -14,27 +34,27 @@
       <el-table :data="tableData">
         <el-table-column align="center"
                          prop="studentId"
-                         label="学生学号">
+                         label="设备编号">
         </el-table-column>
         <el-table-column align="center"
                          prop="studentName"
-                         label="学生姓名">
+                         label="设备型号">
         </el-table-column>
         <el-table-column align="center"
                          prop="parentId"
-                         label="家长序号">
+                         label="绑定学生学号">
         </el-table-column>
         <el-table-column align="center"
                          prop="parentName"
-                         label="家长姓名">
+                         label="绑定学生姓名">
         </el-table-column>
         <el-table-column align="center"
                          prop="mobile"
-                         label="联系方式">
+                         label="绑定时间">
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
-                         label="主要监护人">
+                         label="操作人">
           <template #default="scope">
             <span v-show="scope.row.mainGuardian==='1'">是</span>
             <span v-show="scope.row.mainGuardian==='2'">否</span>
@@ -42,7 +62,7 @@
         </el-table-column>
         <el-table-column align="center"
                          prop="remark"
-                         label="激活状态">
+                         label="绑定状态">
           <template #default="scope">
             <span v-show="scope.row.isActive==='1'">激活</span>
             <span v-show="scope.row.isActive==='2'">未激活</span>
@@ -52,13 +72,13 @@
                          label="操作">
           <template #default="scope">
             <div class="row-wrapper option">
-              <Button size="small" @click="edit(scope.row)" :type="'success'">编辑</Button>
+              <Button v-show="false" size="small" @click="edit(scope.row)" :type="'success'">绑定</Button>
               <el-popconfirm confirm-button-text="确定"
                              cancel-button-text="取消"
                              @confirm="del(scope.row)"
                              :title="'确认删除吗?'">
                 <template #reference>
-                  <Button size="small" :type="'danger'">删除</Button>
+                  <Button size="small" :type="'danger'">解绑</Button>
                 </template>
               </el-popconfirm>
             </div>
@@ -77,23 +97,29 @@
     </div>
     <!--  新增弹窗  -->
     <Dialog v-model="addVisiable"
-            title="添加教务处"
+            title="新增绑定关系"
+            width="20vw"
             @close="addVisiable=false">
       <Form>
-        <el-form-item label="名称">
+        <el-form-item label="设备编号">
           <Input v-model="addForm.name"/>
         </el-form-item>
-        <el-form-item label="联系方式">
-          <Input v-model="addForm.mobile"/>
+        <el-form-item label="设备型号">
+          <el-select>
+            <el-option label="a-001" value="1"></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="备注">
-          <Input type="textarea" v-model="addForm.remark"/>
+        <el-form-item label="学生学号">
+          <Input v-model="addForm.remark"/>
         </el-form-item>
-        <el-form-item>
-          <Button :type="'primary'">确定</Button>
-          <Button @click="addVisiable=false">取消</Button>
+        <el-form-item label="学生姓名">
+          <Input v-model="addForm.remark"/>
         </el-form-item>
       </Form>
+      <template #footer>
+        <Button :type="'primary'">确定</Button>
+        <Button @click="addVisiable=false">取消</Button>
+      </template>
     </Dialog>
     <!--  编辑弹窗  -->
     <Dialog v-model="editVisiable"
@@ -159,6 +185,9 @@ export default {
           remark: '11111111'
         }
       ],
+      form:{
+        range:[]
+      },
       page: {
         page: 1,
         limit: 10,
