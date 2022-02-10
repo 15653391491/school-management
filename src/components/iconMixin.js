@@ -1,4 +1,4 @@
-import {Expand, Fold, Menu, RefreshLeft, CaretTop, CaretBottom,Iphone} from '@element-plus/icons-vue'
+import {Expand, Fold, Menu, RefreshLeft, CaretTop, CaretBottom,Iphone,Lock} from '@element-plus/icons-vue'
 
 export default {
     components: {
@@ -8,6 +8,7 @@ export default {
         RefreshLeft,
         CaretTop,
         CaretBottom,
-        Iphone
+        Iphone,
+        Lock
     }
 }

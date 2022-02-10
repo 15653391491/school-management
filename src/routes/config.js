@@ -92,6 +92,16 @@ export default {
             component: () => import('../views/login/Login')
         },
         {
+            path: '/forget',
+            name: 'forget',
+            component: () => import('../views/login/Forget')
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: () => import('../views/login/Register')
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: '404',
             component: () => import('../views/NotFound')
