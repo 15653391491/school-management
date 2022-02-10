@@ -6,27 +6,48 @@
         <div class="subTitle">学校信息管理后台</div>
       </div>
       <div class="col-wrapper form">
-        <Input v-model="form.username" class="input">
-          <div class="row-wrapper">
-            <Iphone class="icon"/>
+        <div class="input-contain row-wrapper">
+          <div class="icon-contain col-wrapper">
+            <Iphone color="#7D7E81" class="icon"/>
           </div>
-        </Input>
-        <Input type="password" v-model="form.password" class="input"/>
-        <div class="row-wrapper forget-password">
-          <span class="forget-password">忘记密码?</span>
+          <input v-model="form.username"
+                 placeholder="请输入注册时的手机号"
+                 class="input"/>
         </div>
-        <Button :type="'primary'" class="login">登录</Button>
+        <div class="row-wrapper" style="justify-content: space-between">
+          <div class="input-contain row-wrapper">
+            <div class="icon-contain col-wrapper">
+              <Checked color="#7D7E81" class="icon" />
+            </div>
+            <input type="password"
+                   placeholder="短信验证码"
+                   v-model="form.password" class="input"/>
+          </div>
+          <Button>获取验证码</Button>
+        </div>
+        <div class="input-contain row-wrapper">
+          <div class="icon-contain col-wrapper">
+            <Lock color="#7D7E81" class="icon" />
+          </div>
+          <input type="password"
+                 placeholder="密码"
+                 v-model="form.password" class="input"/>
+        </div>
+        <Button :type="'primary'" class="login">修改密码</Button>
       </div>
       <div class="register row-wrapper">
-        <span class="register">注册账号</span>
+        <span class="register" @click="$router.push({path:'/register'})">注册账号</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {Iphone} from "_@element-plus_icons-vue@0.2.6@@element-plus/icons-vue";
+
 export default {
   name: "Login",
+  components: {Iphone},
   data() {
     return {
       form: {
@@ -74,10 +95,18 @@ export default {
         align-self: stretch;
       }
 
-      .input {
-        margin: 5px 0;
+      .input-contain {
         align-self: stretch;
-        width: 100%;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        margin: 5px 0;
+
+        .input {
+          outline: none;
+          padding-left: 0;
+          border: 1px solid transparent;
+          align-self: stretch;
+        }
       }
 
       .forget-password {
@@ -95,15 +124,18 @@ export default {
         }
       }
     }
-    .register{
+
+    .register {
       justify-content: flex-end;
       padding: 0 20px;
-      .register{
+
+      .register {
         font-size: 14px;
         padding: 0;
         color: #409EFF
       }
-      .register:hover{
+
+      .register:hover {
         cursor: pointer;
       }
     }
@@ -111,8 +143,11 @@ export default {
 
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
+.icon-contain{
+  padding: 5px 10px;
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 </style>
