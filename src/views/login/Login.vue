@@ -25,7 +25,7 @@
         <div class="row-wrapper forget-password">
           <span @click="$router.push({path:'/forget'})" class="forget-password">忘记密码?</span>
         </div>
-        <Button :type="'primary'" class="login">登录</Button>
+        <Button @click="$router.push({path:'/adminSetting'})" :type="'primary'" class="login">登录</Button>
       </div>
       <div class="register row-wrapper">
         <span class="register" @click="$router.push({path:'/register'})">注册账号</span>
