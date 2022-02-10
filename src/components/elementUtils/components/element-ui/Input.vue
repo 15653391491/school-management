@@ -1,5 +1,9 @@
 <template>
-  <el-input class="input" v-bind="$attrs"/>
+  <el-input class="input" v-bind="$attrs">
+    <template #prefix>
+      <slot></slot>
+    </template>
+  </el-input>
 </template>
 
 <script>

@@ -87,6 +87,11 @@ export default {
             ]
         },
         {
+            path: '/login',
+            name: 'login',
+            component: () => import('../views/login/Login')
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: '404',
             component: () => import('../views/NotFound')

@@ -59,7 +59,7 @@
           <el-menu-item index="/machineModel">型号管理</el-menu-item>
           <el-menu-item index="/bind">绑定关系</el-menu-item>
           <el-menu-item index="/returnManage">退换货管理</el-menu-item>
-<!--          <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>-->
+          <!--          <el-menu-item index="/inkStorge">笔芯入库/出库</el-menu-item>-->
         </el-sub-menu>
         <el-sub-menu class="subMenu"
                      index="教材管理">
@@ -142,7 +142,7 @@
             <template #default>
               <div style="width:100%"
                    class="col-wrapper">
-                <el-button>
+                <el-button @click="logOut">
                   退出
                 </el-button>
               </div>
@@ -250,13 +250,17 @@ export default {
     },
     // --- 事件 ---
     /**
+     * 登出
+     */
+    logOut() {
+      this.$router.push({path: '/login'})
+    },
+    /**
      * tab被点击
      * @param info
      */
     tabClick(info) {
-      // console.log(this.editableTabs[info.index])
       this.breadCrumb = this.editableTabs[info.index].indexPath
-      // this.breadCrumb = info.indexPath
     },
     /**
      * 关闭右侧
